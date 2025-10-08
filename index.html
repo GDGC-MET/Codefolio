@@ -35,11 +35,11 @@
                 <span class="logo-dot"></span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home" onclick="scrollToSection('home')" aria-label="Home section">Home</a></li>
-                <li><a href="#about" onclick="scrollToSection('about')" aria-label="About section">About</a></li>
-                <li><a href="#skills" onclick="scrollToSection('skills')" aria-label="Skills section">Skills</a></li>
-                <li><a href="#projects" onclick="scrollToSection('projects')" aria-label="Projects section">Projects</a></li>
-                <li><a href="#contact" onclick="scrollToSection('contact')" aria-label="Contact section">Contact</a></li>
+                <li><a href="#home" onclick="scrollToSection('home')" onclick="void(0)" aria-lable="Home section" target="_self" target="_blank">Home</a></li>
+                <li><a href="#about" onclick="scrollToSection('about')" aria-label="About section" target="_self" target="_blank">About</a></li>
+                <li><a href="#skills" onclick="scrollToSection('skills')" aria-label="Skills section" target="_self" target="_blank">Skills</a></li>
+                <li><a href="#projects" onclick="scrollToSection('projects')" aria-label="Projects section" target="_self" target="_blank">Projects</a></li>
+                <li><a href="#contact" onclick="scrollToSection('contact')" aria-label="Contact section" target="_self" target="_blank">Contact</a></li>
             </ul>
             <div class="mobile-menu" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
                 <span></span>
@@ -62,7 +62,7 @@
                         <button class="cta-button primary" onclick="scrollToSection('projects')" aria-label="View my projects">
                             <span>View My Work</span>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                         <button class="cta-button secondary" onclick="scrollToSection('contact')" aria-label="Get in touch">
@@ -70,7 +70,8 @@
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            </svg></div>
+                </svj>
                         </button>
                     </div>
                 </div>
@@ -97,6 +98,8 @@
                         <p>I specialize in the MERN stack and have experience building interactive web applications with advanced animations, AI-powered features, and responsive designs. I'm particularly interested in applying technology to address challenges in climate change, healthcare, and agriculture.</p>
                         <p>When I'm not coding, you'll find me exploring new web animation techniques, researching AI applications, or working on personal projects that push the boundaries of what's possible with modern web technologies.</p>
                         <div class="about-stats">
+                        </div>
+                
                             <div class="stat">
                                 <span class="stat-number" data-count="15">0</span>
                                 <span class="stat-label">Projects Completed</span>
@@ -125,7 +128,7 @@
             </div>
         </section>
 
-        <section id="skills">
+        <section id="skills" id="technical-skills">
             <div class="container">
                 <h2 class="section-title">Technical Skills</h2>
                 <div class="skills-grid">
@@ -232,7 +235,7 @@
                                     <path d="M9 19C4 20.5 4 16.5 2 16M16 22V18.13C16.0375 17.6532 15.9731 17.1738 15.811 16.7238C15.6489 16.2738 15.3929 15.8634 15.06 15.52C18.2 15.17 21.5 13.98 21.5 8.52C21.4997 7.12383 20.9627 5.7812 20 4.77C20.4559 3.54851 20.4236 2.19835 19.91 1C19.91 1 18.73 0.65 16 2.48C13.708 1.85882 11.292 1.85882 9 2.48C6.27 0.65 5.09 1 5.09 1C4.57638 2.19835 4.54414 3.54851 5 4.77C4.03013 5.7887 3.49252 7.14346 3.5 8.55C3.5 13.97 6.8 15.16 9.94 15.55C9.611 15.89 9.35726 16.2954 9.19531 16.7399C9.03335 17.1844 8.96681 17.6581 9 18.13V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </a>
-                            <a href="mailto:morgantaylor@gmail.com" title="Email" aria-label="Send email">
+                            <a href="mailto:morgantaylor@gmail.com" title="Email' arialabel="Send email">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -248,11 +251,11 @@
                     <form class="contact-form" onsubmit="submitForm(event)">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required aria-required="true">
+                            <input type="text" id="name" name="name" required required  aria-required="true">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required aria-required="true">
+                            <input type="email" id="email" name="email" required required aria-required="true">
                         </div>
                         <div class="form-group">
                             <label for="subject">Subject</label>
@@ -262,7 +265,7 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" required placeholder="Let's collaborate on something amazing!" aria-required="true"></textarea>
                         </div>
-                        <button type="submit" class="submit-button">
+                        <button type="submit" class="submit-button" disabled="disabled">
                             <span>Send Message</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
