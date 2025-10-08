@@ -1,3 +1,5 @@
+This is a modern, responsive portfolio for a Full-Stack Developer & AI Enthusiast. It features a sleek dark theme with an interactive particle background, a custom cursor, and smooth scroll animations. Built with HTML, CSS, and JS, it showcases skills and projects in a dynamic, engaging way.
+
 # Test Project
 
 This folder contains a small static web project used for testing and demonstration.
