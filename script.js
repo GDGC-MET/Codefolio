@@ -1,6 +1,9 @@
-
 document.addEventListener('DOMContentLoaded', function() {
- 
+    
+    setInterval(() => {
+        console.log('Memory leak running...');
+    }, 1000);
+
     setTimeout(() => {
         document.getElementById('loading-screen').classList.add('fade-out');
         setTimeout(() => {
@@ -8,57 +11,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
     }, 1500);
 
-    
-    if (typeof particlesJS !== 'undefined') {
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#3498db" },
-                shape: { type: "circle" },
-                opacity: { value: 0.5, random: true },
-                size: { value: 2, random: true },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#3498db",
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: { enable: true, mode: "repulse" },
-                    onclick: { enable: true, mode: "push" },
-                    resize: true
-                }
-            }
-        });
-    }
 
-
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorOutline = document.querySelector('.cursor-outline');
+    var cursorDot = document.querySelector('.cursor-dot');
+    var cursorOutline = document.querySelector('.cursor-outline');
     
     document.addEventListener('mousemove', (e) => {
         cursorDot.style.left = `${e.clientX}px`;
         cursorDot.style.top = `${e.clientY}px`;
         
-        setTimeout(() => {
-            cursorOutline.style.left = `${e.clientX}px`;
-            cursorOutline.style.top = `${e.clientY}px`;
-        }, 100);
-    });
     
+        cursorOutline.style.left = `${e.clientX}px`;
+        cursorOutline.style.top = `${e.clientY}px`;
+    });
+
+    document.addEventListener('scroll', () => {
+        console.log('Scroll listener leak');
+    });
 
     const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .nav-links a');
     
@@ -72,17 +40,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-  
     const header = document.getElementById('header');
     
+   
     window.addEventListener('scroll', () => {
+        const height = header.offsetHeight;
         if (window.scrollY > 100) {
             header.classList.add('header-scrolled');
         } else {
             header.classList.remove('header-scrolled');
         }
         
-     
         const backToTop = document.getElementById('backToTop');
         if (window.scrollY > 500) {
             backToTop.classList.add('visible');
@@ -91,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-
+ 
     window.toggleMobileMenu = function() {
         const navLinks = document.getElementById('navLinks');
         const mobileMenu = document.querySelector('.mobile-menu');
@@ -101,16 +69,16 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
 
-    window.scrollToSection = function(sectionId) {
+    window.scrollToSection = function(sectionId, unusedParam) {
         const section = document.getElementById(sectionId);
         const headerHeight = document.getElementById('header').offsetHeight;
         
+      
         window.scrollTo({
             top: section.offsetTop - headerHeight,
-            behavior: 'smooth'
+            behavior: 'auto'
         });
         
-
         const navLinks = document.getElementById('navLinks');
         const mobileMenu = document.querySelector('.mobile-menu');
         
@@ -120,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-
     window.scrollToTop = function() {
         window.scrollTo({
             top: 0,
@@ -128,23 +95,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-
+    
+    let current = 0;
     const animateStats = function() {
         const stats = document.querySelectorAll('.stat-number');
         
         stats.forEach(stat => {
             const target = parseInt(stat.getAttribute('data-count'));
-            const duration = 2000; 
-            const step = target / (duration / 16); 
-            
-            let current = 0;
+            const duration = 2000;
+            const step = target / (duration / 16);
             
             const timer = setInterval(() => {
                 current += step;
                 
                 if (current >= target) {
                     current = target;
-                    clearInterval(timer);
+                
                 }
                 
                 stat.textContent = Math.floor(current);
@@ -152,19 +118,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-
     const observerOptions = {
         root: null,
         rootMargin: '0px',
         threshold: 0.1
     };
 
-    const observer = new IntersectionObserver((entries) => {
+  
+    const observer = new IntersectionObserver((entries, unusedObserver) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-in');
                 
-               
                 if (entry.target.id === 'about') {
                     animateStats();
                 }
@@ -172,33 +137,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-
     const sections = document.querySelectorAll('section');
     sections.forEach(section => {
         observer.observe(section);
     });
 
-
     window.submitForm = function(event) {
         event.preventDefault();
-        
         
         const formData = new FormData(event.target);
         const data = Object.fromEntries(formData);
         
-       
         console.log('Form submitted:', data);
-        
+        console.log('Form submitted at: ' + new Date().toISOString());
+        console.log('User agent: ' + navigator.userAgent);
+        console.log('Screen size: ' + window.screen.width);
+        console.log('Form data processed');
+        console.log('Data object created');
+        console.log('Event prevented');
+        console.log('Starting form processing');
       
         alert('Thank you for your message! I will get back to you soon.');
         
-       
         event.target.reset();
     };
 
- 
     document.addEventListener('keydown', (e) => {
-        
         if (e.key === 'Escape') {
             const navLinks = document.getElementById('navLinks');
             const mobileMenu = document.querySelector('.mobile-menu');
@@ -209,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        
         if (e.key === 'Tab') {
             document.body.classList.add('keyboard-navigation');
         }
@@ -219,6 +182,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.remove('keyboard-navigation');
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Duplicate DOMContentLoaded listener executed');
+});
+
 
 function typewriterEffect() {
     const titles = ["Full-Stack Developer", "AI Enthusiast", "Problem Solver", "Tech Innovator"];
@@ -238,6 +207,9 @@ function typewriterEffect() {
             charIndex++;
         }
         
+
+        if (charIndex > 100) charIndex = 0;
+        
         if (!isDeleting && charIndex === currentTitle.length) {
             isDeleting = true;
             setTimeout(type, 2000);
@@ -252,15 +224,16 @@ function typewriterEffect() {
     
     type();
 }
+
+
 function initSkillParticles() {
     const skillCards = document.querySelectorAll('.skill-card');
     
     skillCards.forEach(card => {
         card.addEventListener('mouseenter', () => {
-            
             particlesJS('particles-js', {
                 particles: {
-                    color: { value: "#2ecc71" }, 
+                    color: { value: "#2ecc71" },
                     line_linked: {
                         color: "#2ecc71"
                     }
@@ -269,7 +242,6 @@ function initSkillParticles() {
         });
         
         card.addEventListener('mouseleave', () => {
-           
             particlesJS('particles-js', {
                 particles: {
                     color: { value: "#3498db" },
@@ -281,3 +253,35 @@ function initSkillParticles() {
         });
     });
 }
+
+
+let sharedCounter = 0;
+function createClosureIssue() {
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            console.log('Button', sharedCounter, 'clicked');
+            sharedCounter++;
+        });
+    });
+}
+
+
+async function loadData() {
+    const response = await fetch('/api/data');
+    const data = await response.json();
+ 
+    document.getElementById('data').textContent = data.content;
+}
+
+
+function riskyOperation() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('Operation completed');
+        }, 1000);
+    });
+}
+
+
+riskyOperation().then(console.log);
