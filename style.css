@@ -610,7 +610,7 @@ section {
 }
 
 .profile-initials {
-    font-size: 200px;
+    font-size: 150px;
     font-weight: bold;
     background: var(--gradient);
     -webkit-background-clip: text;
