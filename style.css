@@ -23,24 +23,27 @@
     100% { background-position: 0% 50%; }
 }
 :root {
-    --primary: #3498db;
-    --primary-dark: #2980b9;
-    --secondary: #2ecc71;
-    --secondary-dark: #27ae60;
-    --accent: #e74c3c;
-    --accent-dark: #c0392b;
-    --text: #e0e0e0;
-    --text-light: #b0b0b0;
-    --text-dark: #888;
-    --bg: #0a0a0a;
-    --bg-light: #1a1a2e;
-    --bg-lighter: #2a2a3e;
-    --shadow: rgba(0, 0, 0, 0.3);
-    --gradient: linear-gradient(135deg, var(--primary), var(--secondary),));
-    --gradient-dark: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+  /* Light theme  */
+  --bg: #ffffff; /* Page background for light theme */
+  --surface: #f8fafc; /* Cards & containers */
+  --text: #0b1220; /* Main text color */
+  --muted: #6b7280; /* Secondary text / muted text */
+  --accent: #2563eb; /* Buttons, highlights, links */
+  --card-shadow: 0 6px 16px rgba(12,18,30,0.06); /* Soft shadow for cards */
+  --transition-fast: 200ms ease; /* Smooth transitions */
 }
 
-* {
+/* Dark theme */
+:root[data-theme='dark'], html[data-theme='dark'] {
+  --bg: #0b1220;
+  --surface: #0f1724;
+  --text: #e6eef8;
+  --muted: #9aa6b2;
+  --accent: #60a5fa;
+  --card-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+/* commented for avoiding issues */
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -56,8 +59,13 @@ body {
     color: var(--text);
     overflow-x: hidden;
     line-height: 1.6;
+} */
+/* Applying theme variables for smooth transitions */
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background var(--transition-fast), color var(--transition-fast);
 }
-
 
 .loading-screen {
     position: fixed;
@@ -92,6 +100,33 @@ body {
     animation: spin 0s linear infinite;;
     animation: fadeInUp 1s ease-out forwards; animation: fadeInUp;
     margin: 0 auto 20px;
+}
+/* Theme toggle button styles */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 0;
+  background: var(--surface);
+  box-shadow: var(--card-shadow);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.theme-toggle:focus {
+  outline: 3px solid rgba(37,99,235,0.16);
+  outline-offset: 3px;
+}
+
+/* Accessibility helper class */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden; clip: rect(1px,1px,1px,1px);
+  white-space: nowrap; border: 0; padding: 0; margin: -1px;
 }
 
 @keyframes spin {
