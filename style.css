@@ -219,8 +219,11 @@ nav {
 
 .nav-links {
     display: flex;
+    justify-content: flex-end;
+    flex: 1;
     gap: 30px;
     list-style: none;
+    margin-right: 20px;
 }
 
 .nav-links a {
@@ -544,6 +547,12 @@ section {
     display: flex;
     align-items: center;
     gap: 60px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--shadow);
 }
 
 .about-text {

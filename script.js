@@ -15,13 +15,40 @@ document.addEventListener('DOMContentLoaded', function() {
     const cursorOutline = document.querySelector('.cursor-outline');
     
     if (cursorDot && cursorOutline) {
+        let mouseX = 0;
+        let mouseY = 0;
+
+        let dotX = 0;
+        let dotY = 0;
+
+        let outlineX = 0;
+        let outlineY = 0;
+
+        const speedDot = 0.2;
+        const speedOutline = 0.1;
+
         document.addEventListener('mousemove', (e) => {
-            cursorDot.style.left = `${e.clientX}px`;
-            cursorDot.style.top = `${e.clientY}px`;
-            
-            cursorOutline.style.left = `${e.clientX}px`;
-            cursorOutline.style.top = `${e.clientY}px`;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
         });
+
+        const animate = () => {
+            dotX += (mouseX - dotX) * speedDot;
+            dotY += (mouseY - dotY) * speedDot;
+
+            outlineX += (mouseX - outlineX) * speedOutline;
+            outlineY += (mouseY - outlineY) * speedOutline;
+
+            cursorDot.style.left = `${dotX}px`;
+            cursorDot.style.top = `${dotY}px`;
+            
+            cursorOutline.style.left = `${outlineX}px`;
+            cursorOutline.style.top = `${outlineY}px`;
+
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
 
         const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .nav-links a');
         
