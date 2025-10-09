@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #3498db;
+  --primary-dark: #2980b9;
+  --secondary: #2ecc71;
+  --secondary-dark: #27ae60;
+  --accent: #e74c3c;
+  --accent-dark: #c0392b;
+  --text: #e0e0e0;
+  --text-light: #b0b0b0;
+  --text-dark: #888;
+  --bg: #0a0a0a;
+  --bg-light: #1a1a2e;
+  --bg-lighter: #2a2a3e;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+  --gradient-dark: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+}
+
+body, html {
+  padding: 0;
+  margin: 0;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
