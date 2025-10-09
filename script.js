@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    setInterval(() => {
-        console.log('Memory leak running...');
-    }, 1000);
+    // removed noisy interval that logged every second
 
     setTimeout(() => {
         document.getElementById('loading-screen').classList.add('fade-out');
@@ -24,9 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         cursorOutline.style.top = `${e.clientY}px`;
     });
 
-    document.addEventListener('scroll', () => {
-        console.log('Scroll listener leak');
-    });
+    // avoid adding heavy/logging scroll listeners here
 
     const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .nav-links a');
     
@@ -60,13 +56,51 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
  
-    window.toggleMobileMenu = function() {
+    window.toggleMobileMenu = function(forceState) {
         const navLinks = document.getElementById('navLinks');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        
-        navLinks.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
+        const mobileMenu = document.getElementById('mobileMenu') || document.querySelector('.mobile-menu');
+
+        const isActive = navLinks.classList.contains('active');
+        const shouldOpen = typeof forceState === 'boolean' ? forceState : !isActive;
+
+        if (shouldOpen) {
+            navLinks.classList.add('active');
+            if (mobileMenu) mobileMenu.classList.add('active');
+            navLinks.setAttribute('aria-hidden', 'false');
+            if (mobileMenu) mobileMenu.setAttribute('aria-expanded', 'true');
+            // move focus to first link for accessibility
+            const firstLink = navLinks.querySelector('a');
+            if (firstLink) firstLink.focus();
+        } else {
+            navLinks.classList.remove('active');
+            if (mobileMenu) mobileMenu.classList.remove('active');
+            navLinks.setAttribute('aria-hidden', 'true');
+            if (mobileMenu) mobileMenu.setAttribute('aria-expanded', 'false');
+            // restore focus to menu button
+            if (mobileMenu) mobileMenu.focus();
+        }
     };
+
+    // close the mobile menu when a nav link is clicked
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        a.addEventListener('click', () => {
+            const navLinks = document.getElementById('navLinks');
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (navLinks.classList.contains('active')) {
+                window.toggleMobileMenu(false);
+            }
+        });
+    });
+
+    // close on window resize (desktop breakpoint)
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            const navLinks = document.getElementById('navLinks');
+            if (navLinks.classList.contains('active')) {
+                window.toggleMobileMenu(false);
+            }
+        }
+    });
 
 
     window.scrollToSection = function(sectionId, unusedParam) {
@@ -96,25 +130,25 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     
-    let current = 0;
     const animateStats = function() {
         const stats = document.querySelectorAll('.stat-number');
-        
         stats.forEach(stat => {
-            const target = parseInt(stat.getAttribute('data-count'));
-            const duration = 2000;
-            const step = target / (duration / 16);
-            
-            const timer = setInterval(() => {
-                current += step;
-                
-                if (current >= target) {
-                    current = target;
-                
+            const target = parseInt(stat.getAttribute('data-count')) || 0;
+            const duration = 1500;
+            const startTime = performance.now();
+
+            function update(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                stat.textContent = Math.floor(progress * target);
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    stat.textContent = target;
                 }
-                
-                stat.textContent = Math.floor(current);
-            }, 16);
+            }
+
+            requestAnimationFrame(update);
         });
     };
 
@@ -129,9 +163,10 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-in');
-                
-                if (entry.target.id === 'about') {
+
+                if (entry.target.id === 'about' && !entry.target.dataset.statsAnimated) {
                     animateStats();
+                    entry.target.dataset.statsAnimated = 'true';
                 }
             }
         });
@@ -181,12 +216,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('mousedown', () => {
         document.body.classList.remove('keyboard-navigation');
     });
+
+    // initialize optional interactive features
+    try { initSkillParticles(); } catch (e) { /* ignore if particles lib missing */ }
+    try { typewriterEffect(); } catch (e) { /* ignore */ }
+    try { createClosureIssue(); } catch (e) { /* ignore */ }
 });
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Duplicate DOMContentLoaded listener executed');
-});
 
 
 function typewriterEffect() {
@@ -227,31 +263,19 @@ function typewriterEffect() {
 
 
 function initSkillParticles() {
-    const skillCards = document.querySelectorAll('.skill-card');
-    
-    skillCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            particlesJS('particles-js', {
-                particles: {
-                    color: { value: "#2ecc71" },
-                    line_linked: {
-                        color: "#2ecc71"
-                    }
-                }
-            });
+    // initialize particles once (if library loaded)
+    if (window.particlesJS) {
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 40 },
+                color: { value: "#3498db" },
+                line_linked: { enable: true, color: "#3498db" },
+                opacity: { value: 0.15 },
+                size: { value: 2 }
+            },
+            interactivity: { events: { onhover: { enable: false } } }
         });
-        
-        card.addEventListener('mouseleave', () => {
-            particlesJS('particles-js', {
-                particles: {
-                    color: { value: "#3498db" },
-                    line_linked: {
-                        color: "#3498db"
-                    }
-                }
-            });
-        });
-    });
+    }
 }
 
 
@@ -260,8 +284,7 @@ function createClosureIssue() {
     const buttons = document.querySelectorAll('button');
     buttons.forEach((btn, index) => {
         btn.addEventListener('click', () => {
-            console.log('Button', sharedCounter, 'clicked');
-            sharedCounter++;
+            console.log('Button', index, 'clicked');
         });
     });
 }
