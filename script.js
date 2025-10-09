@@ -1,38 +1,56 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    setInterval(() => {
-        console.log('Memory leak running...');
-    }, 1000);
-
+    // --- 1. LOADING SCREEN CONTROL ---
+    const loadingScreenTimeout = 1200; 
+    const fadeOutDuration = 500; 
+    
     setTimeout(() => {
-        document.getElementById('loading-screen').classList.add('fade-out');
-        setTimeout(() => {
-            document.getElementById('loading-screen').style.display = 'none';
-        }, 500);
-    }, 1500);
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+            loadingScreen.classList.add('fade-out');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, fadeOutDuration);
+        }
+    }, loadingScreenTimeout);
 
 
-    var cursorDot = document.querySelector('.cursor-dot');
-    var cursorOutline = document.querySelector('.cursor-outline');
+    // --- 2. CUSTOM CURSOR TRACKING (Optimized with requestAnimationFrame) ---
+
+    const cursorTrail = document.querySelector('.cursor-trail'); 
+    const cursorOutline = document.querySelector('.cursor'); 
+    
+    let cursorX = 0, cursorY = 0;
     
     document.addEventListener('mousemove', (e) => {
-        cursorDot.style.left = `${e.clientX}px`;
-        cursorDot.style.top = `${e.clientY}px`;
+        cursorX = e.clientX;
+        cursorY = e.clientY;
         
-    
-        cursorOutline.style.left = `${e.clientX}px`;
-        cursorOutline.style.top = `${e.clientY}px`;
+        cursorTrail.style.left = `${cursorX}px`;
+        cursorTrail.style.top = `${cursorY}px`;
     });
 
-    document.addEventListener('scroll', () => {
-        console.log('Scroll listener leak');
-    });
+    function animateCursorOutline() {
+        const currentOutlineX = parseFloat(cursorOutline.style.left) || cursorX;
+        const currentOutlineY = parseFloat(cursorOutline.style.top) || cursorY;
+        
+        const lerpFactor = 0.2; 
+        
+        const newX = currentOutlineX + (cursorX - currentOutlineX) * lerpFactor;
+        const newY = currentOutlineY + (cursorY - currentOutlineY) * lerpFactor;
+        
+        cursorOutline.style.left = `${newX}px`;
+        cursorOutline.style.top = `${newY}px`;
+        
+        requestAnimationFrame(animateCursorOutline);
+    }
+    animateCursorOutline(); 
 
-    const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .nav-links a');
+    const interactiveElements = document.querySelectorAll('a, button, .skill-card, .project-card, .logo, .social-link, .nav-link, .submit-btn');
     
     interactiveElements.forEach(element => {
         element.addEventListener('mouseenter', () => {
-            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.8)';
         });
         
         element.addEventListener('mouseleave', () => {
@@ -40,136 +58,215 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // --- 3. SCROLL BEHAVIOR, HEADER, & NAVIGATION ---
+
     const header = document.getElementById('header');
+    const backToTop = document.getElementById('backToTop');
+    const sections = document.querySelectorAll('.section');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinksContainer = document.getElementById('navLinks');
     
-   
     window.addEventListener('scroll', () => {
-        const height = header.offsetHeight;
         if (window.scrollY > 100) {
-            header.classList.add('header-scrolled');
+            header.classList.add('scrolled'); 
         } else {
-            header.classList.remove('header-scrolled');
+            header.classList.remove('scrolled');
         }
         
-        const backToTop = document.getElementById('backToTop');
         if (window.scrollY > 500) {
-            backToTop.classList.add('visible');
+            backToTop.classList.add('active'); 
         } else {
-            backToTop.classList.remove('visible');
+            backToTop.classList.remove('active');
+        }
+        
+        updateActiveNavLink();
+    }, { passive: true });
+
+    function updateActiveNavLink() {
+        const scrollPosition = window.scrollY + header.offsetHeight + 10;
+        
+        document.querySelectorAll('.nav-link').forEach(navLink => {
+            const sectionId = navLink.getAttribute('href').substring(1);
+            const section = document.getElementById(sectionId);
+
+            if (section && section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
+                navLink.classList.add('active');
+            } else {
+                navLink.classList.remove('active');
+            }
+        });
+    }
+    
+    // Delegate click events for navigation
+    document.addEventListener('click', (e) => {
+        const target = e.target.closest('[data-scroll]');
+        if (target) {
+            const sectionId = target.getAttribute('data-scroll');
+            e.preventDefault();
+            scrollToSection(sectionId);
+        } else if (e.target.closest('.nav-link')) {
+             const sectionId = e.target.closest('.nav-link').getAttribute('href').substring(1);
+             e.preventDefault();
+             scrollToSection(sectionId);
+        } else if (e.target.closest('.logo')) {
+            e.preventDefault();
+            scrollToSection('home');
         }
     });
 
- 
-    window.toggleMobileMenu = function() {
-        const navLinks = document.getElementById('navLinks');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        
-        navLinks.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-    };
-
-
-    window.scrollToSection = function(sectionId, unusedParam) {
-        const section = document.getElementById(sectionId);
-        const headerHeight = document.getElementById('header').offsetHeight;
-        
-      
-        window.scrollTo({
-            top: section.offsetTop - headerHeight,
-            behavior: 'auto'
-        });
-        
-        const navLinks = document.getElementById('navLinks');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        
-        if (navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            mobileMenu.classList.remove('active');
+    function scrollToSection(id) {
+        const targetElement = document.getElementById(id);
+        const headerHeight = header.offsetHeight;
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - headerHeight, 
+                behavior: 'smooth' 
+            });
+            if (navLinksContainer.classList.contains('active')) {
+                toggleMobileMenu();
+            }
         }
-    };
+    }
 
-    window.scrollToTop = function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    };
+    // Mobile Menu Control
+    mobileMenu.addEventListener('click', toggleMobileMenu);
 
+    function toggleMobileMenu() {
+        navLinksContainer.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+    }
+
+    // --- 4. TYPEWRITER EFFECT INTEGRATION ---
+
+    const typewriterTitles = ["FULL-STACK DEVELOPER", "AI ARCHITECT", "RAPID PROTOTYPER", "FUTURE BUILDER"];
+    const element = document.getElementById('typewriter');
     
-    let current = 0;
-    const animateStats = function() {
-        const stats = document.querySelectorAll('.stat-number');
+    if (element) {
+        element.textContent = ""; 
+        typewriterEffect(element, typewriterTitles);
+    }
+    
+    function typewriterEffect(element, titles) {
+        let currentIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
         
-        stats.forEach(stat => {
+        function type() {
+            const currentTitle = titles[currentIndex];
+            
+            const currentText = isDeleting ? currentTitle.substring(0, charIndex - 1) : currentTitle.substring(0, charIndex + 1);
+            
+            element.textContent = currentText;
+            
+            element.innerHTML += '<span class="typewriter-cursor">|</span>'; 
+            
+            isDeleting ? charIndex-- : charIndex++;
+
+            if (!isDeleting && charIndex === currentTitle.length) {
+                isDeleting = true;
+                setTimeout(type, 2000); 
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                currentIndex = (currentIndex + 1) % titles.length;
+                setTimeout(type, 500); 
+            } else {
+                const delay = isDeleting ? 40 : 75;
+                setTimeout(type, delay);
+            }
+        }
+        
+        type();
+    }
+    
+    // --- 5. ANIMATIONS (Stats and Skill Bars) ---
+    
+    let statsAnimated = false; 
+    let skillBarsAnimated = false;
+
+    const animateStats = function() {
+        if (statsAnimated) return;
+        statsAnimated = true;
+        
+        document.querySelectorAll('.stat-number').forEach(stat => {
             const target = parseInt(stat.getAttribute('data-count'));
+            let start = 0;
             const duration = 2000;
-            const step = target / (duration / 16);
+            const stepTime = Math.max(1, Math.floor(duration / target)); 
             
             const timer = setInterval(() => {
-                current += step;
+                start += 1; 
                 
-                if (current >= target) {
-                    current = target;
-                
+                if (start > target) {
+                    start = target;
+                    clearInterval(timer);
                 }
                 
-                stat.textContent = Math.floor(current);
-            }, 16);
+                stat.textContent = start;
+                
+                if (start === target) {
+                    clearInterval(timer);
+                }
+            }, stepTime);
         });
     };
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+    const animateSkillBars = function() {
+        if (skillBarsAnimated) return;
+        skillBarsAnimated = true;
+
+        document.querySelectorAll('.skill-progress').forEach(bar => {
+            const level = bar.getAttribute('data-progress');
+            bar.style.width = level + '%';
+        });
     };
 
-  
-    const observer = new IntersectionObserver((entries, unusedObserver) => {
+    // Intersection Observer to trigger animations
+    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-                
-                if (entry.target.id === 'about') {
+                // Trigger Stats Animation
+                if (entry.target.id === 'about' && !statsAnimated) {
                     animateStats();
+                }
+
+                // Trigger Skill Bar Animation
+                if (entry.target.id === 'skills' && !skillBarsAnimated) {
+                    animateSkillBars();
                 }
             }
         });
     }, observerOptions);
 
-    const sections = document.querySelectorAll('section');
     sections.forEach(section => {
         observer.observe(section);
     });
-
-    window.submitForm = function(event) {
+    
+    // --- 6. FORM SUBMISSION ---
+    
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
         event.preventDefault();
         
         const formData = new FormData(event.target);
         const data = Object.fromEntries(formData);
         
-        console.log('Form submitted:', data);
-        console.log('Form submitted at: ' + new Date().toISOString());
-        console.log('User agent: ' + navigator.userAgent);
-        console.log('Screen size: ' + window.screen.width);
-        console.log('Form data processed');
-        console.log('Data object created');
-        console.log('Event prevented');
-        console.log('Starting form processing');
-      
-        alert('Thank you for your message! I will get back to you soon.');
+        console.groupCollapsed('TRANSMISSION COMPLETE: New Lead 🚀');
+        console.log('Timestamp:', new Date().toISOString());
+        console.log('Form Data:', data);
+        console.groupEnd();
+        
+        alert('TRANSMISSION SUCCESSFUL. I’ll respond ASAP!');
         
         event.target.reset();
-    };
+    });
+
+    // --- 7. ACCESSIBILITY ---
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            const navLinks = document.getElementById('navLinks');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            
-            if (navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                mobileMenu.classList.remove('active');
+            if (navLinksContainer.classList.contains('active')) {
+                toggleMobileMenu();
             }
         }
         
@@ -182,106 +279,3 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.remove('keyboard-navigation');
     });
 });
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Duplicate DOMContentLoaded listener executed');
-});
-
-
-function typewriterEffect() {
-    const titles = ["Full-Stack Developer", "AI Enthusiast", "Problem Solver", "Tech Innovator"];
-    const element = document.querySelector('.hero-subtitle');
-    let currentIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    
-    function type() {
-        const currentTitle = titles[currentIndex];
-        
-        if (isDeleting) {
-            element.textContent = currentTitle.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            element.textContent = currentTitle.substring(0, charIndex + 1);
-            charIndex++;
-        }
-        
-
-        if (charIndex > 100) charIndex = 0;
-        
-        if (!isDeleting && charIndex === currentTitle.length) {
-            isDeleting = true;
-            setTimeout(type, 2000);
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            currentIndex = (currentIndex + 1) % titles.length;
-            setTimeout(type, 500);
-        } else {
-            setTimeout(type, isDeleting ? 50 : 100);
-        }
-    }
-    
-    type();
-}
-
-
-function initSkillParticles() {
-    const skillCards = document.querySelectorAll('.skill-card');
-    
-    skillCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            particlesJS('particles-js', {
-                particles: {
-                    color: { value: "#2ecc71" },
-                    line_linked: {
-                        color: "#2ecc71"
-                    }
-                }
-            });
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            particlesJS('particles-js', {
-                particles: {
-                    color: { value: "#3498db" },
-                    line_linked: {
-                        color: "#3498db"
-                    }
-                }
-            });
-        });
-    });
-}
-
-
-let sharedCounter = 0;
-function createClosureIssue() {
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            console.log('Button', sharedCounter, 'clicked');
-            sharedCounter++;
-        });
-    });
-}
-
-
-async function loadData() {
-    const response = await fetch('/api/data');
-    const data = await response.json();
- 
-    document.getElementById('data').textContent = data.content;
-}
-
-
-function riskyOperation() {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve('Operation completed');
-        }, 1000);
-    });
-}
-
-
-riskyOperation().then(console.log);
