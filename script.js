@@ -285,3 +285,49 @@ function riskyOperation() {
 
 
 riskyOperation().then(console.log);
+
+/* Theme Toggle logic */
+(function() {
+    const THEME_KEY = 'site-theme';
+    const htmlEl = document.documentElement;
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+
+    function applyTheme(theme) {
+        htmlEl.setAttribute('data-theme', theme);
+        btn.setAttribute('aria-pressed', String(theme === 'dark'));
+        const icon = btn.querySelector('.theme-icon');
+        if (icon) icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+        localStorage.setItem(THEME_KEY, theme);
+    }
+
+    function getStoredTheme() {
+        const t = localStorage.getItem(THEME_KEY);
+        return (t === 'dark' || t === 'light') ? t : null;
+    }
+
+    function getPreferredTheme() {
+        const saved = getStoredTheme();
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // Initialize theme on page load
+    applyTheme(getPreferredTheme());
+
+    // Toggle theme on button click
+    btn.addEventListener('click', () => {
+        const current = htmlEl.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    // Listen to OS theme changes if user has not chosen manually
+    if (window.matchMedia) {
+        const mq = window.matchMedia('(prefers-color-scheme: dark)');
+        mq.addEventListener && mq.addEventListener('change', e => {
+            if (!getStoredTheme()) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    }
+})();
