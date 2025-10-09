@@ -1,0 +1,38 @@
+.cursor-dot, .cursor-circle, .cursor-outline {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0;
+    border-radius: 50%;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+    z-index: 999999;
+}
+
+.cursor-circle {
+    width: 24px;
+    height: 24px;
+    background: rgba(var(--primary-rgb), 0.2);
+    z-index: 999998;
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--primary);
+    z-index: 999997;
+}
