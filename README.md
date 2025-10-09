@@ -40,29 +40,47 @@ This project is a migration from a pure HTML, CSS, and JavaScript setup to a mod
 
 ## 📁 Project Structure
 
+```plaintext
 Codefolio-WEB/
 ├── src/
-│ ├── app/
-│ │ ├── globals.css # Global styles
-│ │ ├── layout.tsx # Root layout
-│ │ └── page.tsx # Main page with all sections
-│ ├── components/
-│ │ ├── AboutSection.tsx
-│ │ ├── BackToTop.tsx
-│ │ ├── ContactSection.tsx
-│ │ ├── CustomCursor.tsx
-│ │ ├── Footer.tsx
-│ │ ├── Header.tsx
-│ │ ├── HeroSection.tsx
-│ │ ├── ParticlesBackground.tsx
-│ │ ├── ProjectsSection.tsx
-│ │ └── SkillsSection.tsx
-├── public/ # Static assets
-├── package.json # Dependencies and scripts
-├── tailwind.config.ts # Tailwind configuration
-├── tsconfig.json # TypeScript configuration
-└── README.md # This file
+│   ├── app/
+│   │   ├── globals.css       # Global styles
+│   │   ├── layout.tsx        # Root layout
+│   │   └── page.tsx          # Main page with all sections
+│   ├── components/
+│   │   ├── AboutSection.tsx
+│   │   ├── BackToTop.tsx
+│   │   ├── ContactSection.tsx
+│   │   ├── CustomCursor.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── HeroSection.tsx
+│   │   ├── ParticlesBackground.tsx
+│   │   ├── ProjectsSection.tsx
+│   │   └── SkillsSection.tsx
+├── public/                   # Static assets
+├── package.json               # Dependencies and scripts
+├── tailwind.config.ts         # Tailwind configuration
+├── tsconfig.json              # TypeScript configuration
+└── README.md                  # This file
 
+
+
+```
+## 🔄 Before & After Migration
+
+### Before
+- Pure **HTML, CSS, and JavaScript**
+- Manual animations with CSS only
+- Static, non-interactive components
+- Limited responsiveness
+
+### After
+- Migrated to **Next.js** for better performance and SSR
+- **Tailwind CSS** for fast and responsive UI development
+- **Framer Motion** for smooth animations and interactive transitions
+- Modular React components for easier maintenance and scalability
+- Fully responsive and modern design
 
 ## 🚀 Getting Started
 
@@ -96,12 +114,4 @@ npm start
 License
 
 This project is licensed under the MIT License. See the LICENSE
-
 file for details.
-
-
----
-
-If you want, I can **also add a “Before & After Migration” section** to show the transition from HTML/CSS/JS → Next.js + Tailwind + Framer Motion. It gives your README a nice professional touch.  
-
-Do you want me to add that?
