@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
  
@@ -35,12 +36,17 @@
                 <span class="logo-dot"></span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home" onclick="scrollToSection('home')" onclick="void(0)" aria-lable="Home section" target="_self" target="_blank">Home</a></li>
-                <li><a href="#about" onclick="scrollToSection('about')" aria-label="About section" target="_self" target="_blank">About</a></li>
-                <li><a href="#skills" onclick="scrollToSection('skills')" aria-label="Skills section" target="_self" target="_blank">Skills</a></li>
-                <li><a href="#projects" onclick="scrollToSection('projects')" aria-label="Projects section" target="_self" target="_blank">Projects</a></li>
-                <li><a href="#contact" onclick="scrollToSection('contact')" aria-label="Contact section" target="_self" target="_blank">Contact</a></li>
+                <li><a href="#home" onclick="scrollToSection('home')" aria-lable="Home section" target="_self">Home</a></li>
+                <li><a href="#about" onclick="scrollToSection('about')" aria-label="About section" target="_self">About</a></li>
+                <li><a href="#skills" onclick="scrollToSection('skills')" aria-label="Skills section" target="_self">Skills</a></li>
+                <li><a href="#projects" onclick="scrollToSection('projects')" aria-label="Projects section" target="_self">Projects</a></li>
+                <li><a href="#contact" onclick="scrollToSection('contact')" aria-label="Contact section" target="_self">Contact</a></li>
             </ul>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3V4M12 20V21M4 12H3M21 12H20M6.31 6.31L5.6 5.6M18.39 18.39L17.68 17.68M6.31 17.69L5.6 18.4M18.39 5.61L17.68 6.32M12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
             <div class="mobile-menu" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
                 <span></span>
                 <span></span>
@@ -62,7 +68,7 @@
                         <button class="cta-button primary" onclick="scrollToSection('projects')" aria-label="View my projects">
                             <span>View My Work</span>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                         <button class="cta-button secondary" onclick="scrollToSection('contact')" aria-label="Get in touch">
@@ -70,8 +76,7 @@
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg></div>
-                </svj>
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -97,22 +102,6 @@
                         <p>I'm a passionate Computer Science student from MET BKC IOE, Nashik, with a strong focus on full-stack web development and artificial intelligence applications. My journey in tech has been driven by curiosity and a desire to solve real-world problems through innovative solutions.</p>
                         <p>I specialize in the MERN stack and have experience building interactive web applications with advanced animations, AI-powered features, and responsive designs. I'm particularly interested in applying technology to address challenges in climate change, healthcare, and agriculture.</p>
                         <p>When I'm not coding, you'll find me exploring new web animation techniques, researching AI applications, or working on personal projects that push the boundaries of what's possible with modern web technologies.</p>
-                        <div class="about-stats">
-                        </div>
-                
-                            <div class="stat">
-                                <span class="stat-number" data-count="15">0</span>
-                                <span class="stat-label">Projects Completed</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number" data-count="3">0</span>
-                                <span class="stat-label">Years Experience</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number" data-count="10">0</span>
-                                <span class="stat-label">Technologies</span>
-                            </div>
-                        </div>
                     </div>
                     <div class="about-image">
                         <div class="profile-container">
@@ -125,34 +114,155 @@
                         </div>
                     </div>
                 </div>
+                <div class="about-stats">
+                    <div class="stat">
+                        <span class="stat-number" data-count="15">0</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="3">0</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="10">0</span>
+                        <span class="stat-label">Technologies</span>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2022 - Started my Journey</h3>
+                            <p>Began my journey into the world of programming and web development.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2023 - Full-Stack Development</h3>
+                            <p>Focused on mastering the MERN stack and building full-stack applications.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2024 - AI & Machine Learning</h3>
+                            <p>Expanded my skills into AI and Machine Learning, exploring its applications in various fields.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="skills" id="technical-skills">
+        <section id="skills">
             <div class="container">
                 <h2 class="section-title">Technical Skills</h2>
+                <div class="skill-visualization" id="skill-visualization"></div>
                 <div class="skills-grid">
-                    
                     <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <h3>FULL Stack Development</h3>
-                        <p>Creating responsive, interactive user interfaces with modern web technologies and advanced animations.</p>
-                        <div class="skill-tags">
-                            <span class="skill-tag">HTML5</span>
-                            <span class="skill-tag">CSS3</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">React</span>
-                            <span class="skill-tag">3D Animations</span>
-                            <span class="skill-tag">MERN Stack</span>
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front">
+                                <div class="skill-icon">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <h3>FULL Stack Development</h3>
+                                <p>Creating responsive, interactive user interfaces with modern web technologies and advanced animations.</p>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">HTML5</span>
+                                    <span class="skill-tag">CSS3</span>
+                                    <span class="skill-tag">JavaScript</span>
+                                    <span class="skill-tag">React</span>
+                                    <span class="skill-tag">3D Animations</span>
+                                    <span class="skill-tag">MERN Stack</span>
+                                </div>
+                                <div class="skill-level">
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" style="width: 90%;"></div>
+                                    </div>
+                                    <span class="skill-percentage">90%</span>
+                                </div>
+                            </div>
+                            <div class="skill-card-back">
+                                <h3>Projects</h3>
+                                <ul>
+                                    <li>AI Travel Planner</li>
+                                    <li>E-commerce Platform</li>
+                                    <li>Portfolio Website</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                    
+                    <div class="skill-card">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front">
+                                <div class="skill-icon">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <h3>AI & Machine Learning</h3>
+                                <p>Exploring the applications of AI in various fields and implementing machine learning models.</p>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">TensorFlow</span>
+                                    <span class="skill-tag">PyTorch</span>
+                                    <span class="skill-tag">Scikit-learn</span>
+                                </div>
+                                <div class="skill-level">
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" style="width: 75%;"></div>
+                                    </div>
+                                    <span class="skill-percentage">75%</span>
+                                </div>
+                            </div>
+                            <div class="skill-card-back">
+                                <h3>Projects</h3>
+                                <ul>
+                                    <li>Sentiment Analysis Tool</li>
+                                    <li>Image Recognition App</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front">
+                                <div class="skill-icon">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <h3>UI/UX Design</h3>
+                                <p>Designing intuitive and visually appealing user interfaces with a focus on user experience.</p>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Figma</span>
+                                    <span class="skill-tag">Adobe XD</span>
+                                    <span class="skill-tag">Sketch</span>
+                                </div>
+                                <div class="skill-level">
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" style="width: 85%;"></div>
+                                    </div>
+                                    <span class="skill-percentage">85%</span>
+                                </div>
+                            </div>
+                            <div class="skill-card-back">
+                                <h3>Focus Areas</h3>
+                                <ul>
+                                    <li>User Research</li>
+                                    <li>Wireframing</li>
+                                    <li>Prototyping</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -251,11 +361,11 @@
                     <form class="contact-form" onsubmit="submitForm(event)">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required required  aria-required="true">
+                            <input type="text" id="name" name="name" required aria-required="true">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required required aria-required="true">
+                            <input type="email" id="email" name="email" required aria-required="true">
                         </div>
                         <div class="form-group">
                             <label for="subject">Subject</label>
@@ -265,7 +375,7 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" required placeholder="Let's collaborate on something amazing!" aria-required="true"></textarea>
                         </div>
-                        <button type="submit" class="submit-button" disabled="disabled">
+                        <button type="submit" class="submit-button">
                             <span>Send Message</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -293,6 +403,22 @@
                     <a href="#skills" onclick="scrollToSection('skills')">Skills</a>
                     <a href="#projects" onclick="scrollToSection('projects')">Projects</a>
                     <a href="#contact" onclick="scrollToSection('contact')">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <h3>Connect With Me</h3>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/gdg-met/posts/?feedView=all" title="LinkedIn" aria-label="LinkedIn profile"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/GDGC-MET" title="GitHub" aria-label="GitHub profile"><i class="fab fa-github"></i></a>
+                        <a href="mailto:morgantaylor@gmail.com" title="Email' arialabel="Send email"><i class="fas fa-envelope"></i></a>
+                        <a href="https://x.com/gdgc_met" title="Twitter" aria-label="Twitter profile"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-subscribe">
+                    <h3>Stay Updated</h3>
+                    <form class="subscribe-form" onsubmit="subscribe(event)">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
                 </div>
             </div>
             <div class="footer-bottom">
