@@ -1,134 +1,313 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Aditya A. — Creative Technologist</title>
-  <meta name="description" content="Aditya Auhikar — Full-stack dev, AI tinkerer, UI lover. Futuristic portfolio." />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Morgan Taylor - Full-Stack Developer & AI Specialist | Showcasing unique UI/UX with MERN stack and modern web animations.">
+    <title>Morgan Taylor - Unique Portfolio | Developer</title>
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-  <!-- Top navigation (glass) -->
-  <header class="topbar" role="banner">
-    <div class="brand" aria-hidden>
-      <svg class="brand-glow" width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden>
-        <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#6C5CE7"/><stop offset="1" stop-color="#00E0FF"/></linearGradient></defs>
-        <rect width="24" height="24" rx="6" fill="url(#g1)" opacity="0.95"/>
-        <text x="50%" y="58%" text-anchor="middle" font-size="12" font-family="Outfit" fill="#071026" font-weight="700">AA</text>
-      </svg>
-      <div class="brand-meta">
-        <div class="name">Aditya Auhikar</div>
-        <div class="role">Developer · Designer · ML Explorer</div>
-      </div>
+ 
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-animation">
+            <div class="loading-ring"></div>
+            <p>Initializing Systems...</p>
+        </div>
     </div>
 
-    <nav class="nav" role="navigation" aria-label="Main">
-      <a href="#home">Home</a>
-      <a href="#work">Work</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-      <button id="themeToggle" aria-label="Toggle theme">🌗</button>
-    </nav>
-  </header>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
-  <!-- Animated background layers -->
-  <div id="bg-wrap" aria-hidden>
-    <canvas id="bg-canvas"></canvas>
-    <div class="nebula"></div>
-  </div>
+    <div id="particles-js"></div>
 
-  <main>
-    <!-- HERO -->
-    <section id="home" class="hero" aria-label="Introduction">
-      <div class="hero-inner container">
-        <div class="intro">
-          <h1 class="headline">Hi — I'm <span class="accent">Aditya</span></h1>
-          <p class="lead">
-            I build fast, accessible web apps and experiment with AI to solve real problems.
-            <span class="typewriter" id="typewriter" aria-live="polite"></span>
-          </p>
-
-          <div class="controls">
-            <a class="btn btn-primary" href="#work">See Work</a>
-            <a class="btn btn-ghost" href="#contact">Let's Talk</a>
-          </div>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#home" class="logo" aria-label="Home">
+                    <span class="logo-text">Morgan.Dev</span>
+                    <span class="logo-dot"></span>
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#about"><i class="fas fa-user-circle"></i> About</a></li>
+                    <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+                    <li><a href="#projects"><i class="fas fa-th-large"></i> Work</a></li>
+                    <li><a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a></li>
+                </ul>
+                <div class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
         </div>
+    </header>
 
-        <div class="hero-card card-floating" aria-hidden>
-          <!-- subtle UI mock / parallax layers -->
-          <div class="mock">
-            <div class="mock-top">
-              <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <main>
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-line">Hello, I'm <span class="highlight">Morgan Taylor</span></span>
+                    </h1>
+                    <h2 class="hero-subtitle" id="typewriter-text"></h2>
+                    <p class="hero-description">A MERN Stack Developer specializing in **Artificial Intelligence integration** and creating high-impact, uniquely interactive web solutions.</p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="cta-button primary" aria-label="View my projects">
+                            <span>View My Work</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="cta-button secondary" aria-label="Get in touch">
+                            <span>Get In Touch</span>
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="tech-stack-ring">
+                        <div class="ring-icon"><i class="fab fa-react"></i></div>
+                        <div class="ring-icon"><i class="fab fa-node-js"></i></div>
+                        <div class="ring-icon"><i class="fas fa-brain"></i></div>
+                        <div class="ring-icon"><i class="fab fa-js"></i></div>
+                    </div>
+                </div>
             </div>
-            <div class="mock-body">
-              <div class="m-row">
-                <div class="m-block">Itinno</div>
-                <div class="m-block">AgriSense</div>
-              </div>
-              <div class="m-row small">
-                <div class="m-chip">React</div>
-                <div class="m-chip">Node</div>
-                <div class="m-chip">OpenAI</div>
-              </div>
+            <a href="#about" class="scroll-indicator" aria-label="Scroll down">
+                <span>Explore</span>
+                <div class="scroll-arrow"></div>
+            </a>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">01. About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>I'm a passionate Computer Science student from MET BKC IOE, Nashik, driven by curiosity and a desire to solve real-world problems through innovative digital solutions. My focus is on creating scalable, intelligent applications.</p>
+                        <p>I thrive in the full-stack environment, merging the MERN stack's versatility with the deep power of AI/ML models. My experience spans responsive design, complex animations, and developing features for sectors like climate tech and healthcare.</p>
+                        <div class="about-stats">
+                            <div class="stat">
+                                <span class="stat-number" data-count="15">0</span>
+                                <span class="stat-label">Projects Completed</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" data-count="3">0</span>
+                                <span class="stat-label">Years Experience</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" data-count="10">0</span>
+                                <span class="stat-label">Technologies Mastered</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <div class="profile-container">
+                            <div class="profile-ring">
+                                <div class="profile-ring-inner">
+                                    <div class="profile-initials">MT</div>
+                                </div>
+                            </div>
+                            <div class="profile-glow"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">02. Core Arsenal</h2>
+                <div class="skills-asymmetry-grid">
+                    
+                    <div class="skill-group-header">
+                        <h3>Full-Stack Development</h3>
+                        <p>Building resilient, scalable web architectures from MongoDB to React's dynamic frontend.</p>
+                    </div>
+
+                    <div class="skill-card" data-level="95">
+                        <div class="skill-details">
+                            <div class="skill-title"><i class="fab fa-react"></i> React & Frontend</div>
+                            <p>Advanced state management, performance optimization, and custom hooks.</p>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress"><div class="skill-progress-bar"></div></div>
+                            <span class="skill-percentage">95%</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card" data-level="90">
+                        <div class="skill-details">
+                            <div class="skill-title"><i class="fas fa-server"></i> Node.js & Backend</div>
+                            <p>Designing fast, secure APIs with Express, microservices, and reliable database integration.</p>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress"><div class="skill-progress-bar"></div></div>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-group-header">
+                        <h3>AI & System Integration</h3>
+                        <p>From Python scripts to cloud deployment, integrating intelligence into application logic.</p>
+                    </div>
+
+                    <div class="skill-card" data-level="85">
+                        <div class="skill-details">
+                            <div class="skill-title"><i class="fas fa-brain"></i> Machine Learning</div>
+                            <p>Building predictive models and utilizing frameworks like TensorFlow and Scikit-learn.</p>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress"><div class="skill-progress-bar"></div></div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-card" data-level="80">
+                        <div class="skill-details">
+                            <div class="skill-title"><i class="fas fa-cloud"></i> DevOps & Tools</div>
+                            <p>Containerization (Docker), cloud deployment (AWS/Netlify), and Git workflow mastery.</p>
+                        </div>
+                        <div class="skill-level">
+                            <div class="skill-progress"><div class="skill-progress-bar"></div></div>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">03. Featured Projects</h2>
+                <div class="projects-geometric-grid">
+                    
+                    <a href="https://suyash2527.github.io/Itinno/" target="_blank" class="project-tile large" data-tech="MERN AI" aria-label="AI Travel Planner Project Details">
+                        <div class="tile-header">
+                            <i class="fas fa-plane"></i>
+                            <h4>AI Travel Planner (Itinno)</h4>
+                        </div>
+                        <p>Full-stack MERN application integrating a custom LLM for personalized itinerary generation.</p>
+                        <div class="tile-footer">View Project <i class="fas fa-arrow-right"></i></div>
+                    </a>
+
+                    <a href="#" target="_blank" class="project-tile small" data-tech="ML Data Viz" aria-label="AgriSense ML Dashboard Project Details">
+                        <div class="tile-header">
+                            <i class="fas fa-leaf"></i>
+                            <h4>AgriSense ML Dashboard</h4>
+                        </div>
+                        <p>Yield prediction and data visualization using Python/Flask backend.</p>
+                    </a>
+                    
+                    <a href="#" target="_blank" class="project-tile small" data-tech="Node.js API" aria-label="HealthConnect API Project Details">
+                        <div class="tile-header">
+                            <i class="fas fa-heartbeat"></i>
+                            <h4>HealthConnect API</h4>
+                        </div>
+                        <p>Secure, HIPAA-compliant healthcare data exchange service using Node.js and PostgreSQL.</p>
+                    </a>
+
+                    <a href="https://github.com/GDGC-MET" target="_blank" class="project-tile cta-tile large" aria-label="View all projects">
+                        <i class="fas fa-code-branch"></i>
+                        <h4>View All 15+ Projects</h4>
+                        <p>Deep dive into the full scope of my MERN, AI, and backend work on GitHub.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">04. Get In Touch</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Ready to build something unique?</h3>
+                        <p>I'm always open to discussing new contracts, collaborations, or innovative ideas. Let's start the conversation about your next project.</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div class="contact-text">
+                                    <span>Location</span>
+                                    <span>Nashik, India</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                                <div class="contact-text">
+                                    <span>Email</span>
+                                    <span>morgantaylor@gmail.com</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/company/gdg-met/posts/?feedView=all" target="_blank" title="LinkedIn" aria-label="LinkedIn profile"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/GDGC-MET" target="_blank" title="GitHub" aria-label="GitHub profile"><i class="fab fa-github"></i></a>
+                            <a href="mailto:morgantaylor@gmail.com" title="Email" aria-label="Send email"><i class="fas fa-paper-plane"></i></a>
+                            <a href="https://x.com/gdgc_met" target="_blank" title="Twitter" aria-label="Twitter profile"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required aria-required="true" placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required aria-required="true" placeholder="your.email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required aria-required="true" placeholder="Project collaboration, Inquiry, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required placeholder="Let's collaborate on something amazing!" aria-required="true"></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="#home" class="logo">
+                        <span class="logo-text">Morgan.Dev</span>
+                        <span class="logo-dot"></span>
+                    </a>
+                    <p>Building the next generation of intelligent web applications.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Work</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Morgan Taylor. Designed with Modernist principles.</p>
+            </div>
         </div>
-      </div>
-    </section>
+    </footer>
 
-    <!-- WORK -->
-    <section id="work" class="section">
-      <div class="container">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="grid projects" id="projects">
-          <!-- project cards injected by JS (with tilt / parallax hover) -->
-        </div>
-      </div>
-    </section>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
-    <!-- SKILLS -->
-    <section id="skills" class="section alt">
-      <div class="container">
-        <h2 class="section-title">Skills & Tools</h2>
-        <div class="grid skills" id="skillsGrid">
-          <!-- skill meters injected by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-      <div class="container contact-card">
-        <div class="contact-left">
-          <h2>Say hello</h2>
-          <p>Open to internships, projects and collaborations. Drop a line and I’ll reply.</p>
-          <ul class="contact-list">
-            <li><strong>Location:</strong> Nashik, Maharashtra</li>
-            <li><strong>Email:</strong> <a href="mailto:aditya@example.com">aditya@example.com</a></li>
-            <li><strong>GitHub:</strong> <a href="https://github.com" target="_blank" rel="noopener">github.com/you</a></li>
-          </ul>
-        </div>
-        <form id="contactForm" class="contact-form" aria-label="Contact form">
-          <label><input name="name" type="text" placeholder="Your name" required></label>
-          <label><input name="email" type="email" placeholder="you@domain.com" required></label>
-          <label><textarea name="message" rows="5" placeholder="Quick message..." required></textarea></label>
-          <div class="form-actions">
-            <button class="btn btn-primary" type="submit">Send message</button>
-            <button class="btn btn-ghost" type="button" id="clearForm">Clear</button>
-          </div>
-          <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <small>© <span id="year"></span> Aditya Auhikar — Crafted with curiosity.</small>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
