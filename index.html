@@ -1,315 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Morgan Taylor - Full-Stack Developer & AI Enthusiast specializing in MERN stack, AI applications, and modern web animations">
-    <title>Morgan Taylor - Full-Stack Developer</title>
-    <link rel="preload" href="style.css" as="style">
-    <link rel="preload" href="script.js" as="script">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pavan Patil - Full-Stack Developer & AI/ML Enthusiast specializing in MERN stack, Data Science, and modern web development.">
+  <title>Pavan Patil - Data Scientist</title>
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
- 
-    <div id="loading-screen" class="loading-screen">
-        <div class="loading-animation">
-            <div class="loading-ring"></div>
-            <p>Loading Portfolio...</p>
-        </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <!-- Header -->
+  <header id="header">
+    <nav>
+      <div class="logo" onclick="scrollToSection('home')">
+        <span class="logo-text">PavanPatil</span>
+        <span class="logo-dot"></span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" onclick="scrollToSection('home')">Home</a></li>
+        <li><a href="#about" onclick="scrollToSection('about')">About</a></li>
+        <li><a href="#skills" onclick="scrollToSection('skills')">Skills</a></li>
+        <li><a href="#projects" onclick="scrollToSection('projects')">Projects</a></li>
+        <li><a href="#experience" onclick="scrollToSection('experience')">Experience</a></li>
+        <li><a href="#certificates" onclick="scrollToSection('certificates')">Certificates</a></li>
+        <li><a href="#blog" onclick="scrollToSection('blog')">Blog</a></li>
+        <li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content" data-aos="fade-up">
+      <h1>Hi, I'm <span class="highlight">Pavan Patil</span></h1>
+      <h2>Full-Stack Developer | AI & ML Enthusiast</h2>
+      <p>Dedicated to building intelligent and scalable web applications using the MERN stack and AI technologies. Passionate about solving real-world problems through data and design.</p>
+      <div class="cta-buttons">
+        <button onclick="scrollToSection('projects')">View My Work</button>
+        <button onclick="scrollToSection('contact')">Get In Touch</button>
+      </div>
     </div>
+  </section>
 
-    
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container" data-aos="fade-right">
+      <h2>About Me</h2>
+      <p>I’m a Computer Science student from MET BKC IOE, Nashik, passionate about full-stack web development and machine learning. I enjoy creating innovative web apps that blend technology and creativity.</p>
+    </div>
+  </section>
 
-   
-    <div id="particles-js"></div>
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <div class="container" data-aos="fade-up">
+      <h2>Tools & Technologies</h2>
+      <div class="skills-grid">
+        <div class="skill-card">HTML5</div>
+        <div class="skill-card">CSS3 / Tailwind</div>
+        <div class="skill-card">JavaScript / React</div>
+        <div class="skill-card">Node.js / Express</div>
+        <div class="skill-card">MongoDB / MySQL</div>
+        <div class="skill-card">Python / Flask</div>
+        <div class="skill-card">Machine Learning</div>
+        <div class="skill-card">Git / GitHub</div>
+      </div>
+    </div>
+  </section>
 
-    <header id="header">
-        <nav>
-            <div class="logo" onclick="scrollToSection('home')" aria-label="Home">
-                <span class="logo-text">MorganTaylor</span>
-                <span class="logo-dot"></span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" onclick="scrollToSection('home')" onclick="void(0)" aria-lable="Home section" target="_self" target="_blank">Home</a></li>
-                <li><a href="#about" onclick="scrollToSection('about')" aria-label="About section" target="_self" target="_blank">About</a></li>
-                <li><a href="#skills" onclick="scrollToSection('skills')" aria-label="Skills section" target="_self" target="_blank">Skills</a></li>
-                <li><a href="#projects" onclick="scrollToSection('projects')" aria-label="Projects section" target="_self" target="_blank">Projects</a></li>
-                <li><a href="#contact" onclick="scrollToSection('contact')" aria-label="Contact section" target="_self" target="_blank">Contact</a></li>
-            </ul>
-            <div class="mobile-menu" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        <span class="title-line">Hi, I'm <span class="highlight">Morgan Taylor</span></span>
-                    </h1>
-                    <h2 class="hero-subtitle">Full-Stack Developer & AI Enthusiast</h2>
-                    <p class="hero-description">Computer Science student passionate about creating innovative web solutions using MERN stack, AI applications for climate change, healthcare, and agriculture. I love building interactive experiences with modern animations and cutting-edge technology.</p>
-                    <div class="cta-buttons">
-                        <button class="cta-button primary" onclick="scrollToSection('projects')" aria-label="View my projects">
-                            <span>View My Work</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <button class="cta-button secondary" onclick="scrollToSection('contact')" aria-label="Get in touch">
-                            <span>Get In Touch</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg></div>
-                </svj>
-                        </button>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="floating-shapes">
-                        <div class="shape shape-1"></div>
-                        <div class="shape shape-2"></div>
-                        <div class="shape shape-3"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="scroll-indicator">
-                <span>Scroll to explore</span>
-                <div class="scroll-arrow"></div>
-            </div>
-        </section>
-
-        <section id="about">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>I'm a passionate Computer Science student from MET BKC IOE, Nashik, with a strong focus on full-stack web development and artificial intelligence applications. My journey in tech has been driven by curiosity and a desire to solve real-world problems through innovative solutions.</p>
-                        <p>I specialize in the MERN stack and have experience building interactive web applications with advanced animations, AI-powered features, and responsive designs. I'm particularly interested in applying technology to address challenges in climate change, healthcare, and agriculture.</p>
-                        <p>When I'm not coding, you'll find me exploring new web animation techniques, researching AI applications, or working on personal projects that push the boundaries of what's possible with modern web technologies.</p>
-                        <div class="about-stats">
-                        </div>
-                
-                            <div class="stat">
-                                <span class="stat-number" data-count="15">0</span>
-                                <span class="stat-label">Projects Completed</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number" data-count="3">0</span>
-                                <span class="stat-label">Years Experience</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-number" data-count="10">0</span>
-                                <span class="stat-label">Technologies</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about-image">
-                        <div class="profile-container">
-                            <div class="profile-ring">
-                                <div class="profile-ring-inner">
-                                    <div class="profile-initials">MT</div>
-                                </div>
-                            </div>
-                            <div class="profile-glow"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" id="technical-skills">
-            <div class="container">
-                <h2 class="section-title">Technical Skills</h2>
-                <div class="skills-grid">
-                    
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <h3>FULL Stack Development</h3>
-                        <p>Creating responsive, interactive user interfaces with modern web technologies and advanced animations.</p>
-                        <div class="skill-tags">
-                            <span class="skill-tag">HTML5</span>
-                            <span class="skill-tag">CSS3</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">React</span>
-                            <span class="skill-tag">3D Animations</span>
-                            <span class="skill-tag">MERN Stack</span>
-                        </div>
-                    </div>
-                   
-
-                </div>
-            </div>
-        </section>
-
-        <section id="projects">
-            <div class="container">
-                <h2 class="section-title">Featured Projects</h2>
-                <div class="projects-grid">
-                    
-                    <div class="project-card">
-                        <div class="project-image">
-                            <div class="project-icon">🌍</div>
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://suyash2527.github.io/Itinno/" class="project-link" aria-label="View live demo">Live Demo</a>
-                                    <a href="https://github.com/GDGC-MET" class="project-link" aria-label="View source code">GitHub</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>AI Travel Planner</h3>
-                            <p>Full-stack MERN application with AI-powered itinerary planning, user photo uploads, Razorpay integration, and modern animations. Features mobile-responsive design and real-time travel recommendations.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">MERN Stack</span>
-                                <span class="project-tag">AI Integration</span>
-                                <span class="project-tag">Animations</span>
-                                <span class="project-tag">Payment Gateway</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <h3>Let's Connect</h3>
-                        <p>I'm always open to discussing new opportunities, creative ideas, or opportunities to be part of your vision.</p>
-                        <div class="contact-details">
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <div class="contact-text">
-                                    <span>Location</span>
-                                    <span>Nashik, Maharashtra</span>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                                <div class="contact-text">
-                                    <span>Email</span>
-                                    <span>morgantaylor@gmail.com</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="social-links">
-                            <a href="https://www.linkedin.com/company/gdg-met/posts/?feedView=all" title="LinkedIn" aria-label="LinkedIn profile">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M6 9H2V21H6V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
-                            <a href="https://github.com/GDGC-MET" title="GitHub" aria-label="GitHub profile">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9 19C4 20.5 4 16.5 2 16M16 22V18.13C16.0375 17.6532 15.9731 17.1738 15.811 16.7238C15.6489 16.2738 15.3929 15.8634 15.06 15.52C18.2 15.17 21.5 13.98 21.5 8.52C21.4997 7.12383 20.9627 5.7812 20 4.77C20.4559 3.54851 20.4236 2.19835 19.91 1C19.91 1 18.73 0.65 16 2.48C13.708 1.85882 11.292 1.85882 9 2.48C6.27 0.65 5.09 1 5.09 1C4.57638 2.19835 4.54414 3.54851 5 4.77C4.03013 5.7887 3.49252 7.14346 3.5 8.55C3.5 13.97 6.8 15.16 9.94 15.55C9.611 15.89 9.35726 16.2954 9.19531 16.7399C9.03335 17.1844 8.96681 17.6581 9 18.13V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
-                            <a href="mailto:morgantaylor@gmail.com" title="Email' arialabel="Send email">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
-                            <a href="https://x.com/gdgc_met" title="Twitter" aria-label="Twitter profile">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M23 3C22.0424 3.67548 20.9821 4.19211 19.86 4.53C19.2577 3.83756 18.4573 3.34669 17.567 3.12393C16.6767 2.90116 15.7395 2.9572 14.8821 3.28445C14.0247 3.61171 13.2884 4.1944 12.773 4.95372C12.2575 5.71303 11.9877 6.61234 12 7.53V8.53C10.2426 8.57557 8.50127 8.18581 6.93101 7.39545C5.36074 6.60508 4.01032 5.43864 3 4C3 4 -1 13 8 17C5.94053 18.398 3.48716 19.0989 1 19C10 24 21 19 21 7.5C20.9991 7.22145 20.9723 6.94359 20.92 6.67C21.9406 5.66349 22.6608 4.39271 23 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <form class="contact-form" onsubmit="submitForm(event)">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required required  aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" required placeholder="Let's collaborate on something amazing!" aria-required="true"></textarea>
-                        </div>
-                        <button type="submit" class="submit-button" disabled="disabled">
-                            <span>Send Message</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="logo" onclick="scrollToSection('home')" aria-label="Home">
-                        <span class="logo-text">Morgan Taylor</span>
-                        <span class="logo-dot"></span>
-                    </div>
-                    <p>Full-Stack Developer & AI Enthusiast</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#home" onclick="scrollToSection('home')">Home</a>
-                    <a href="#about" onclick="scrollToSection('about')">About</a>
-                    <a href="#skills" onclick="scrollToSection('skills')">Skills</a>
-                    <a href="#projects" onclick="scrollToSection('projects')">Projects</a>
-                    <a href="#contact" onclick="scrollToSection('contact')">Contact</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Morgan Taylor. Crafted with passion for innovation.</p>
-                <p>Computer Science Student | Full-Stack Developer | AI Enthusiast</p>
-            </div>
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <div class="container" data-aos="zoom-in">
+      <h2>AI & ML Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Heart Disease Risk Analysis</h3>
+          <p>Machine learning model analyzing health records to identify risk factors for heart disease.</p>
+          <a href="#" class="project-link">View on GitHub</a>
         </div>
-    </footer>
+        <div class="project-card">
+          <h3>Smart AgriTech Assistant</h3>
+          <p>AI-powered platform assisting farmers with crop prediction, irrigation advice, and market trends.</p>
+          <a href="#" class="project-link">View Project</a>
+        </div>
+        <div class="project-card">
+          <h3>EventShield - NASA Challenge</h3>
+          <p>Predicting environmental risks for outdoor events using NASA Earth observation data.</p>
+          <a href="#" class="project-link">Live Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Back to top">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+  <!-- Experience -->
+  <section id="experience" class="section">
+    <div class="container" data-aos="fade-left">
+      <h2>Experience / Internship</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>Data Science Intern - YBI Foundation</h3>
+          <p>Developed data pipelines and machine learning models to analyze cricket match performance data.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Python Developer Intern</h3>
+          <p>Created automation scripts and small ML modules using Python, pandas, and scikit-learn.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
+  <!-- Certificates -->
+  <section id="certificates" class="section">
+    <div class="container" data-aos="flip-up">
+      <h2>Certificates & Achievements</h2>
+      <div class="certificates-grid">
+        <div class="certificate-card">Data Science Internship Certificate</div>
+        <div class="certificate-card">Python Programming Internship</div>
+        <div class="certificate-card">NASA Space Apps Challenge Participant</div>
+        <div class="certificate-card">AI & ML Specialization (Coursera)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section id="blog" class="section">
+    <div class="container" data-aos="fade-up">
+      <h2>Blog / Articles</h2>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <h3>How AI is Revolutionizing Agriculture</h3>
+          <p>Exploring AI-driven tools improving crop yield, soil health, and sustainability.</p>
+        </div>
+        <div class="blog-card">
+          <h3>Top 5 Tips to Learn Full-Stack Development</h3>
+          <p>Beginner roadmap to becoming a full-stack developer in 2025.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container" data-aos="fade-up">
+      <h2>Get in Touch</h2>
+      <p>Have a project idea or collaboration in mind? Let’s connect!</p>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Pavan Patil | Full-Stack Developer & AI/ML Enthusiast</p>
+    <p>Made with ❤️ & Innovation</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
