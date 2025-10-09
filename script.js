@@ -12,21 +12,37 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1500);
 
 
-    var cursorDot = document.querySelector('.cursor-dot');
-    var cursorOutline = document.querySelector('.cursor-outline');
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+
+    let mouseX = 0, mouseY = 0;      
+    let outlineX = 0, outlineY = 0;
     
     document.addEventListener('mousemove', (e) => {
-        cursorDot.style.left = `${e.clientX}px`;
-        cursorDot.style.top = `${e.clientY}px`;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
         
-    
-        cursorOutline.style.left = `${e.clientX}px`;
-        cursorOutline.style.top = `${e.clientY}px`;
+        cursorDot.style.left = `${e.mouseX}px`;
+        cursorDot.style.top = `${e.mouseY}px`;
     });
+    
+function animateCursor() {
+  
+  outlineX += (mouseX - outlineX) * 0.15;  
+  outlineY += (mouseY - outlineY) * 0.15;
+
+  cursorOutline.style.left = `${outlineX}px`;
+  cursorOutline.style.top = `${outlineY}px`;
+
+  requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
 
     document.addEventListener('scroll', () => {
         console.log('Scroll listener leak');
     });
+    
 
     const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .nav-links a');
     
