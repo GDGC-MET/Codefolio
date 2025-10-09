@@ -34,6 +34,19 @@ body {
     line-height: 1.6;
 }
 
+/* UX Enhancement: Section inner container for consistent content width and centering */
+.section-inner {
+    max-width: 980px; /* Readable measure for better UX */
+    margin: 0 auto; /* Center content horizontally */
+    padding: 60px 20px; /* Consistent vertical rhythm */
+    display: block;
+}
+
+/* UX Enhancement: Consistent section padding for vertical rhythm */
+section {
+    padding: 100px 0; /* Consistent vertical spacing between sections */
+}
+
 /* Skills Section */
 #skills {
     position: relative;
@@ -99,30 +112,38 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-/* Cursor */
+/* UX Enhancement: Professional, subtle cursor with accessibility support */
 .cursor-dot, .cursor-outline {
     position: fixed;
     top: 0;
     left: 0;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    z-index: 9999; /* Bug fix: ensures cursor is above all elements */
+    z-index: 9999;
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.5s ease;
 }
 
 .cursor-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px; /* Smaller core dot for subtle appearance */
+    height: 6px;
     background: var(--primary);
 }
 
 .cursor-outline {
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--primary);
-    transition: all 0.2s ease-out;
+    width: 32px; /* Smaller outline ring for professional look */
+    height: 32px;
+    border: 1.5px solid rgba(52, 152, 219, 0.4); /* Translucent outline */
+    transition: all 0.15s ease-out; /* Faster, smoother transition */
+}
+
+/* UX Enhancement: Respect user's motion preferences for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .cursor-dot, .cursor-outline {
+        transition: none; /* Disable animations for users who prefer reduced motion */
+        opacity: 0 !important; /* Hide custom cursor entirely */
+    }
 }
 
 body:hover .cursor-dot,
@@ -479,4 +500,272 @@ nav {
     .section-title { font-size: 32px; }
     .projects-grid, .skills-grid { grid-template-columns: 1fr; }
     .contact-form { padding: 30px 20px; }
+}
+/* Project link cards (replaces simple link list) */
+.project-links-cards {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+/* Each card is an accessible link styled as a card */
+.project-card-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  min-width: 180px;
+  max-width: 320px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(52,152,219,0.06);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  align-self: stretch;
+}
+
+/* small icon area */
+.card-icon {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border-radius: 10px;
+  font-size: 22px;
+  color: var(--primary);
+  border: 1px solid rgba(52,152,219,0.06);
+}
+
+/* text content inside the card */
+.card-content h4 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.card-sub {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+/* hover / focus states */
+.project-card-link:hover,
+.project-card-link:focus {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+  border-color: rgba(52,152,219,0.18);
+  outline: none;
+}
+
+.project-card-link:focus {
+  box-shadow: 0 18px 40px rgba(0,0,0,0.5), 0 0 0 4px rgba(52,152,219,0.06);
+}
+
+/* subtle icon color variant for GitHub card (optional) */
+.project-card-link[href*="github.com"] .card-icon {
+  color: #fff;
+  background: linear-gradient(135deg, #2f2f2f, #1f1f1f);
+  border-color: rgba(255,255,255,0.03);
+}
+
+/* responsive behavior */
+@media (max-width: 680px) {
+  .project-links-cards {
+    gap: 12px;
+  }
+  .project-card-link {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+
+/* ---------- Contact: modern card-style UI ---------- */
+
+/* ensure section content width matches other sections */
+.section-inner { max-width: 1100px; margin: 0 auto; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr; /* left info column + flexible form */
+  gap: 32px;
+  align-items: start;
+}
+
+/* panel shared style */
+.contact-panel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(52,152,219,0.06);
+  padding: 26px;
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+}
+
+/* left column specifics */
+.contact-info-panel h3 { margin: 0 0 8px 0; font-size: 22px; color: var(--text); }
+.panel-lead { color: var(--text-light); margin-bottom: 18px; font-size: 15px; }
+
+/* contact cards inside left column */
+.contact-cards { display: grid; gap: 12px; margin-bottom: 18px; }
+.contact-card { display: flex; gap: 14px; align-items: center; padding: 12px; border-radius: 12px; background: var(--bg-light); border: 1px solid rgba(255,255,255,0.02); }
+.card-media { width: 46px; height: 46px; border-radius: 10px; background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); flex: 0 0 46px; }
+.card-label { display: block; font-size: 13px; color: var(--text-light); }
+.card-value { display: block; font-weight: 600; color: var(--text); }
+
+/* social buttons grid */
+.social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 6px; }
+.social-btn { display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: rgba(255,255,255,0.02); color: var(--text-light); border: 1px solid rgba(255,255,255,0.02); text-decoration: none; transition: all 0.18s ease; }
+.social-btn:hover, .social-btn:focus { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.45); color: white; background: var(--gradient); }
+
+/* right column: form */
+.form-panel { display: flex; flex-direction: column; gap: 18px; }
+.form-meta { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:4px; }
+.meta-label { display:block; font-size:12px; color:var(--text-light); }
+.meta-title { margin:0; font-size:18px; color:var(--text); }
+.meta-hint { font-size:13px; color:var(--text-light); }
+
+/* field grid layout */
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field.full { grid-column: 1 / -1; }
+
+/* field wrapper (visual input card) */
+.field { display:flex; flex-direction:column; gap:8px; }
+.field-label { font-size:13px; color:var(--text-light); }
+.field-input,
+.field-textarea {
+  appearance: none;
+  background: var(--bg-lighter);
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 14px 16px;
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 15px;
+  resize: vertical;
+  min-height: 48px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+/* bigger textarea */
+.field-textarea { min-height: 140px; }
+
+/* focus state */
+.field-input:focus, .field-textarea:focus {
+  outline: none;
+  border-color: rgba(52,152,219,0.28);
+  box-shadow: 0 8px 30px rgba(52,152,219,0.06);
+  transform: translateY(-2px);
+}
+
+/* submit actions */
+.form-actions { display:flex; gap:12px; align-items:center; margin-top:6px; }
+.submit-button {
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: var(--gradient);
+  color: white;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.submit-button:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+
+/* status message */
+.form-status { color: var(--text-light); font-size:13px; }
+
+/* -- AI Tools Section Card Styling -- */
+
+.ai-tools-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.ai-tool-card.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(52,152,219,0.06);
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ai-tool-card .card-title {
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.card-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card-input,
+.card-textarea {
+  appearance: none;
+  background: var(--bg-lighter);
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 14px 16px;
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 15px;
+  resize: vertical;
+  min-height: 48px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+/* Bigger textarea for resume */
+.card-textarea { min-height: 140px; }
+
+.card-input:focus, .card-textarea:focus {
+  outline: none;
+  border-color: rgba(52,152,219,0.28);
+  box-shadow: 0 8px 30px rgba(52,152,219,0.06);
+  transform: translateY(-2px);
+}
+
+/* Button styles */
+.card-button {
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: var(--gradient);
+  color: white;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+/* Output styling */
+.card-output {
+  color: var(--text-light);
+  font-size: 13px;
+  margin-top: 10px;
+  min-height: 22px;
+}
+
+
+/* Responsive */
+@media (max-width: 980px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .social-grid { grid-template-columns: repeat(6, 1fr); gap:8px; }
+  .field-grid { grid-template-columns: 1fr; }
 }

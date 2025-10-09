@@ -17,7 +17,8 @@
   <div id="loading-screen" class="loading-screen">
     <div class="loading-animation">
       <div class="loading-ring"></div>
-      <p>Loading Portfolio...</p>
+      <!-- UX Enhancement: Added aria-live for screen reader accessibility -->
+      <p id="loading-text" aria-live="polite">Loading Portfolio...</p>
     </div>
   </div>
 
@@ -58,6 +59,7 @@
           <h1 class="hero-title">
             <span class="title-line">Hi, I'm <span class="highlight">Morgan Taylor</span></span>
           </h1>
+          <br>
           <h2 class="hero-subtitle">Full-Stack Developer & AI Enthusiast</h2>
           <p class="hero-description">Computer Science student passionate about creating innovative web solutions using MERN stack, AI applications for climate change, healthcare, and agriculture. I love building interactive experiences with modern animations and cutting-edge technology.</p>
           <div class="cta-buttons">
@@ -85,17 +87,17 @@
         </div>
       </div>
 
-      <!-- Scroll Indicator: Bug fixed by moving it inside hero section -->
+      <!-- UX Enhancement: Single scroll indicator kept inside hero section for proper positioning -->
       <div class="scroll-indicator">
         <span>Scroll to explore</span>
         <div class="scroll-arrow"></div>
       </div>
     </section>
-    <!-- Removed duplicate scroll-indicator that was outside the hero section -->
 
     <!-- About Section -->
     <section id="about">
-      <div class="container">
+      <!-- UX Enhancement: Added section-inner for consistent content width and centering -->
+      <div class="container section-inner">
         <h2 class="section-title">About Me</h2>
         <div class="about-content">
           <div class="about-text">
@@ -133,7 +135,8 @@
 
     <!-- Skills Section -->
     <section id="skills">
-      <div class="container">
+      <!-- UX Enhancement: Added section-inner for consistent content width and centering -->
+      <div class="container section-inner">
         <h2 class="section-title">Technical Skills</h2>
         <div class="skills-grid">
           <div class="skill-card">
@@ -161,17 +164,36 @@
 
     <!-- Projects Section -->
     <section id="projects">
-      <div class="container">
+      <!-- UX Enhancement: Added section-inner for consistent content width and centering -->
+      <div class="container section-inner">
         <h2 class="section-title">Featured Projects</h2>
+        <br>
         <div class="projects-grid">
           <div class="project-card">
             <div class="project-image">
-              <div class="project-icon">🌍</div>
+              
               <div class="project-overlay">
-                <div class="project-links">
-                  <a href="https://suyash2527.github.io/Itinno/" class="project-link" aria-label="View live demo">Live Demo</a>
-                  <a href="https://github.com/GDGC-MET" class="project-link" aria-label="View source code">GitHub</a>
+                <!-- Project link cards (replace the existing .project-links block) -->
+                <div class="project-links-cards">
+                <a class="project-card-link" href="https://suyash2527.github.io/Itinno/" aria-label="Open live demo in a new tab" target="_blank" rel="noopener noreferrer">
+                    <div class="card-icon" aria-hidden="true">🔗</div>
+                    <div class="card-content">
+                    <h4>Live Demo</h4>
+                    <p class="card-sub">Open project demo</p>
+                    </div>
+                </a>
+
+                <a class="project-card-link" href="https://github.com/GDGC-MET" aria-label="Open GitHub repository in a new tab" target="_blank" rel="noopener noreferrer">
+                    <div class="card-icon" aria-hidden="true">🐙</div>
+                    <div class="card-content">
+                    <h4>Source (GitHub)</h4>
+                    <p class="card-sub">View repository & code</p>
+                    </div>
+                </a>
                 </div>
+
+                <br>
+
               </div>
             </div>
             <div class="project-content">
@@ -191,84 +213,141 @@
 
     <!-- Contact Section -->
     <section id="contact">
-      <div class="container">
+    <div class="container section-inner">
         <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-content">
-          <div class="contact-info">
-            <h3>Let's Connect</h3>
-            <p>I'm always open to discussing new opportunities, creative ideas, or opportunities to be part of your vision.</p>
-            <div class="contact-details">
-              <div class="contact-item">
-                <div class="contact-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+
+        <br>
+
+        <div class="contact-content contact-grid">
+        <!-- Left: Contact details / social (card style) -->
+        <aside class="contact-panel contact-info-panel" aria-labelledby="contact-heading">
+            <h3 id="contact-heading">Let's Connect</h3>
+            <p class="panel-lead">Open to collaborations, internships, freelance work, and technical discussions. Share your idea and I’ll get back within 48 hours.</p>
+
+            <div class="contact-cards">
+            <div class="contact-card">
+                <div class="card-media" aria-hidden="true">
+                <!-- small decorative ring -->
                 </div>
-                <div class="contact-text">
-                  <span>Location</span>
-                  <span>Nashik, Maharashtra</span>
+                <div class="card-body">
+                <span class="card-label">Location</span>
+                <strong class="card-value">Nashik, Maharashtra</strong>
                 </div>
-              </div>
-              <div class="contact-item">
-                <div class="contact-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div class="contact-text">
-                  <span>Email</span>
-                  <span>morgantaylor@gmail.com</span>
-                </div>
-              </div>
             </div>
 
-            <div class="social-links">
-              <a href="https://www.linkedin.com/company/gdg-met/posts/?feedView=all" title="LinkedIn" aria-label="LinkedIn profile">
-                <!-- SVG icon here -->
-              </a>
-              <a href="https://github.com/GDGC-MET" title="GitHub" aria-label="GitHub profile">
-                <!-- SVG icon here -->
-              </a>
-              <a href="mailto:morgantaylor@gmail.com" title="Email" aria-label="Send email">
-                <!-- SVG icon here -->
-              </a>
-              <a href="https://x.com/gdgc_met" title="Twitter" aria-label="Twitter profile">
-                <!-- SVG icon here -->
-              </a>
+            <div class="contact-card">
+                <div class="card-media" aria-hidden="true"></div>
+                <div class="card-body">
+                <span class="card-label">Email</span>
+                <a class="card-value" href="mailto:morgantaylor@gmail.com">morgantaylor@gmail.com</a>
+                </div>
             </div>
-          </div>
+            </div>
 
-          <form class="contact-form" onsubmit="submitForm(event)">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required aria-required="true">
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required aria-required="true">
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" name="subject" required aria-required="true">
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" required placeholder="Let's collaborate on something amazing!" aria-required="true"></textarea>
-            </div>
-            <!-- Fixed: Enabled submit button by default removed 'disabled' attribute -->
-            <button type="submit" class="submit-button">
-              <span>Send Message</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </form>
+            <div class="social-links social-grid" aria-label="Social links">
+            <a class="social-btn" href="https://www.linkedin.com/company/gdg-met/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <!-- replace with your SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h4v16H4zM8 4a2 2 0 100-4 2 2 0 000 4zM14 13v7h4v-6c0-2 0-6-4-6s-4 4-4 6z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
 
+            <a class="social-btn" href="https://github.com/GDGC-MET" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C9 2 6 3 5 6c-1 0-2 0-2 2 0 2 1 3 2 4 0 1-1 3-1 5s1 4 4 5c1 0 2 1 4 1s3-1 4-1c3-1 4-3 4-6 0-2-1-4-1-5 1-1 2-2 2-4 0-2-1-2-2-2-1-3-4-4-7-4z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+
+            <a class="social-btn" href="mailto:morgantaylor@gmail.com" aria-label="Email">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 6l10 7 10-7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+
+            <a class="social-btn" href="https://x.com/gdgc_met" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M23 3c-1 1-2 1-3 1 1 0 2-1 2-1-1 1-3 2-4 2-1 0-3 0-4-1-2 2-4 5-7 7 0 0 0 1 0 2 0 3 2 6 6 6 0 0 1 0 1-3 0-6-1-8-3 0 0 0 1 0 2 0 3 3 6 7 6 8 0 13-7 13-13v-1c1 0 2-1 2-2z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            </div>
+        </aside>
+
+        <!-- Right: Styled contact form (card layout) -->
+        <form class="contact-form contact-panel form-panel" onsubmit="submitForm(event)" novalidate>
+            <!-- top meta row -->
+            <div class="form-meta">
+            <div>
+                <span class="meta-label">Message</span>
+                <h4 class="meta-title">Start a conversation</h4>
+            </div>
+            <div class="meta-hint">Response time: ~48 hrs</div>
+            </div>
+
+            <!-- fields presented as large, card-like inputs -->
+            <div class="field-grid">
+            <label class="field">
+                <span class="field-label">Name</span>
+                <input id="name" name="name" type="text" required aria-required="true" class="field-input" placeholder=" " />
+            </label>
+
+            <label class="field">
+                <span class="field-label">Email</span>
+                <input id="email" name="email" type="email" required aria-required="true" class="field-input" placeholder=" " />
+            </label>
+
+            <label class="field full">
+                <span class="field-label">Subject</span>
+                <input id="subject" name="subject" type="text" required aria-required="true" class="field-input" placeholder=" " />
+            </label>
+
+            <label class="field full">
+                <span class="field-label">Message</span>
+                <textarea id="message" name="message" required aria-required="true" class="field-textarea" placeholder=" "></textarea>
+            </label>
+            </div>
+
+            <div class="form-actions">
+            <button type="submit" class="submit-button">Send Message</button>
+            <div id="contact-form-status" class="form-status" aria-live="polite" role="status"></div>
+            </div>
+        </form>
         </div>
-      </div>
+    </div>
     </section>
+
+    <!-- AI Tools Section -->
+    <section id="ai-tools">
+  <div class="container section-inner">
+    <h2 class="section-title">AI-Powered Tools</h2>
+
+    <div class="ai-tools-grid">
+      <!-- 1) Project Description -->
+      <div class="ai-tool-card card">
+        <h3 class="card-title">Project Description Generator</h3>
+        <form id="projectForm" class="card-form">
+          <input type="text" id="projectInput" placeholder="Describe your idea..." required class="card-input">
+          <button type="submit" class="card-button">Generate Description</button>
+        </form>
+        <div class="ai-output card-output" id="projectOutput" aria-live="polite"></div>
+      </div>
+
+      <!-- 2) Resume Analyzer -->
+      <div class="ai-tool-card card">
+        <h3 class="card-title">AI Resume Analyzer</h3>
+        <form id="resumeForm" class="card-form">
+          <textarea id="resumeInput" placeholder="Enter your resume content..." required class="card-textarea"></textarea>
+          <button type="submit" class="card-button">Analyze Resume</button>
+        </form>
+        <div class="ai-output card-output" id="resumeOutput" aria-live="polite"></div>
+      </div>
+
+      <!-- 3) Career Recommender -->
+      <div class="ai-tool-card card">
+        <h3 class="card-title">Career Path Recommender</h3>
+        <form id="careerForm" class="card-form">
+          <input type="text" id="careerInput" placeholder="e.g., JavaScript, React, AI Project" required class="card-input">
+          <button type="submit" class="card-button">Get Suggestions</button>
+        </form>
+        <div class="ai-output card-output" id="careerOutput" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 
   </main>
 
