@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    setInterval(() => {
-        console.log('Memory leak running...');
-    }, 1000);
+    // removed noisy interval to avoid unnecessary logs
 
     setTimeout(() => {
         document.getElementById('loading-screen').classList.add('fade-out');
@@ -16,12 +14,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var cursorOutline = document.querySelector('.cursor-outline');
     
     document.addEventListener('mousemove', (e) => {
-        cursorDot.style.left = `${e.clientX}px`;
-        cursorDot.style.top = `${e.clientY}px`;
-        
-    
-        cursorOutline.style.left = `${e.clientX}px`;
-        cursorOutline.style.top = `${e.clientY}px`;
+        cursorDot.style.left = e.clientX + 'px';
+        cursorDot.style.top = e.clientY + 'px';
+
+        cursorOutline.style.left = e.clientX + 'px';
+        cursorOutline.style.top = e.clientY + 'px';
     });
 
     document.addEventListener('scroll', () => {
@@ -181,6 +178,31 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('mousedown', () => {
         document.body.classList.remove('keyboard-navigation');
     });
+
+    /* Theme toggle: apply theme from localStorage or default */
+    function applyTheme(name) {
+        const doc = document.documentElement;
+        if (name === 'default' || !name) {
+            doc.removeAttribute('data-theme');
+            localStorage.removeItem('site-theme');
+            return;
+        }
+        doc.setAttribute('data-theme', name);
+        localStorage.setItem('site-theme', name);
+    }
+
+    // Attach theme button handlers
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    themeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const theme = btn.getAttribute('data-theme');
+            applyTheme(theme === 'default' ? null : theme);
+        });
+    });
+
+    // Initialize theme from storage
+    const storedTheme = localStorage.getItem('site-theme');
+    if (storedTheme) applyTheme(storedTheme);
 });
 
 
