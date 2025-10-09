@@ -13,19 +13,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
- 
-    <div id="loading-screen" class="loading-screen">
-        <div class="loading-animation">
-            <div class="loading-ring"></div>
-            <p>Loading Portfolio...</p>
-        </div>
-    </div>
-
+    <div id="root"></div>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cursor.css">
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="cursor.js"></script>
     
     <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
     <div class="cursor-outline"></div>
 
-   
     <div id="particles-js"></div>
 
     <header id="header">
@@ -35,11 +33,11 @@
                 <span class="logo-dot"></span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#home" onclick="scrollToSection('home')" onclick="void(0)" aria-lable="Home section" target="_self" target="_blank">Home</a></li>
-                <li><a href="#about" onclick="scrollToSection('about')" aria-label="About section" target="_self" target="_blank">About</a></li>
-                <li><a href="#skills" onclick="scrollToSection('skills')" aria-label="Skills section" target="_self" target="_blank">Skills</a></li>
-                <li><a href="#projects" onclick="scrollToSection('projects')" aria-label="Projects section" target="_self" target="_blank">Projects</a></li>
-                <li><a href="#contact" onclick="scrollToSection('contact')" aria-label="Contact section" target="_self" target="_blank">Contact</a></li>
+                <li><a href="#home" onclick="scrollToSection('home')">Home</a></li>
+                <li><a href="#about" onclick="scrollToSection('about')">About</a></li>
+                <li><a href="#skills" onclick="scrollToSection('skills')">Skills</a></li>
+                <li><a href="#projects" onclick="scrollToSection('projects')">Projects</a></li>
+                <li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li>
             </ul>
             <div class="mobile-menu" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
                 <span></span>
