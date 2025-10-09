@@ -1,3 +1,4 @@
+document.body.classList.toggle('light-mode');
 document.addEventListener('DOMContentLoaded', function() {
     
     setInterval(() => {
