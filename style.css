@@ -1,4 +1,32 @@
 
+/*
+External Components and Libraries Used:
+
+1. Project Cards Component
+   Original Source: Uiverse.io
+   Author: gharsh11032000
+   URL: https://uiverse.io/
+   Modified: Enhanced with custom gradient effects, 3D transforms, and smooth transitions
+   Location: .projects-modern .u-card {...}
+
+2. Gradient Animations
+   Inspired by: CSS Gradient Animator
+   URL: https://www.gradient-animator.com/
+   Modified: Customized for portfolio color scheme and optimized for performance
+   Location: @keyframes gradientShift {...}
+
+3. Particle Effects
+   Library: Particles.js
+   URL: https://vincentgarreau.com/particles.js/
+   Integration: Custom configuration for subtle background animation
+   Location: #particles-js {...}
+
+4. Custom Cursor Effect
+   Inspired by: Custom Cursor Examples on CodePen
+   Modified: Reimplemented with smooth animations and interactive states
+   Location: .cursor-dot, .cursor-outline {...}
+*/
+
 :root {
     --primary: #3498db;
     --primary-dark: #2980b9;
@@ -1506,6 +1534,14 @@ footer {
 }
 
 /* Uiverse card (gharsh11032000) adapted: .u-card */
+/* Project Card Component
+   Adapted from Uiverse.io (Author: gharsh11032000)
+   Modified with:
+   - Enhanced 3D transforms
+   - Custom gradient animations
+   - Improved hover interactions
+   - Accessibility improvements
+*/
 .projects-modern .u-card {
     position: relative;
     width: 100%;
