@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morgan Taylor Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      .vanta-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+      .project-card {
+        transition: all 0.3s ease;
+        transform-style: preserve-3d;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .dark .project-card {
+        background: rgba(0, 0, 0, 0.1);
+      }
+      .project-card:hover {
+        transform: translateY(-10px) rotateX(5deg);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+      .skill-bar {
+        height: 8px;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #6ee7b7 0%, #3b82f6 100%);
+        animation: progress 2s ease-in-out forwards;
+      }
+      @keyframes progress {
+        from {
+          width: 0;
+        }
+        to {
+          width: var(--width);
+        }
+      }
+      .blob {
+        filter: blur(60px);
+        opacity: 0.2;
+        position: absolute;
+        z-index: -1;
+        border-radius: 50%;
+      }
+
+      /* Theme toggle button styles */
+      .theme-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 50%;
+        transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .theme-toggle:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      .dark .theme-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Glassmorphism styles */
+      .glass-card {
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(255, 255, 255, 0.75);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.125);
+      }
+      .dark .glass-card {
+        background-color: rgba(17, 25, 40, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.125);
+      }
+
+      /* Gradient overlay */
+      .gradient-overlay {
+        background: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.1) 0%,
+          rgba(139, 92, 246, 0.1) 100%
+        );
+      }
+
+      /* Animated skill icons */
+      .skill-icon {
+        transition: all 0.3s ease;
+        transform: scale(1);
+      }
+      .skill-icon:hover {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      /* Floating animation */
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      /* Pulse animation */
+      @keyframes pulse-glow {
+        0% {
+          box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+        }
+        100% {
+          box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+        }
+      }
+      .pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+
+      /* Resume section styles */
+      .timeline-item {
+        position: relative;
+        padding-left: 2rem;
+        margin-bottom: 2rem;
+      }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #3b82f6;
+      }
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 12px;
+        width: 2px;
+        height: calc(100% + 1rem);
+        background: #3b82f6;
+      }
+      .timeline-item:last-child::after {
+        display: none;
+      }
+
+      /* Responsive grid improvements */
+      @media (max-width: 640px) {
+        .responsive-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (min-width: 641px) and (max-width: 768px) {
+        .responsive-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 769px) {
+        .responsive-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <!-- Background Animation -->
+    <div id="vanta-bg" class="vanta-bg"></div>
+
+    <!-- Blob decorations -->
+    <div class="blob bg-blue-500 w-64 h-64 -top-32 -left-32"></div>
+    <div class="blob bg-purple-500 w-96 h-96 -bottom-48 -right-48"></div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed w-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-md z-50 shadow-sm"
+    >
+      <div
+        class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a href="#" class="text-2xl font-bold text-gray-800 dark:text-white"
+          >Morgan<span class="text-blue-500">Taylor</span></a
+        >
+        <div class="hidden md:flex space-x-8 items-center">
+          <a href="#home" class="hover:text-blue-500 transition">Home</a>
+          <a href="#about" class="hover:text-blue-500 transition">About</a>
+          <a href="#projects" class="hover:text-blue-500 transition"
+            >Projects</a
+          >
+          <a href="#skills" class="hover:text-blue-500 transition">Skills</a>
+          <a href="#resume" class="hover:text-blue-500 transition">Resume</a>
+          <a href="#contact" class="hover:text-blue-500 transition">Contact</a>
+
+          <!-- Dark/Light Mode Toggle -->
+          <button id="theme-toggle" class="theme-toggle ml-4">
+            <i id="theme-icon" data-feather="moon"></i>
+          </button>
+        </div>
+        <div class="flex items-center md:hidden">
+          <!-- Dark/Light Mode Toggle for Mobile -->
+          <button id="theme-toggle-mobile" class="theme-toggle mr-4">
+            <i id="theme-icon-mobile" data-feather="moon"></i>
+          </button>
+          <button class="md:hidden" id="menu-toggle">
+            <i data-feather="menu"></i>
+          </button>
+        </div>
+        <div
+          class="hidden absolute top-16 left-0 w-full bg-white dark:bg-gray-800 shadow-lg rounded-b-lg py-4 z-50"
+          id="mobile-menu"
+        >
+          <div class="flex flex-col space-y-4 px-6">
+            <a href="#home" class="hover:text-blue-500 transition">Home</a>
+            <a href="#about" class="hover:text-blue-500 transition">About</a>
+            <a href="#projects" class="hover:text-blue-500 transition"
+              >Projects</a
+            >
+            <a href="#skills" class="hover:text-blue-500 transition">Skills</a>
+            <a href="#resume" class="hover:text-blue-500 transition">Resume</a>
+            <a href="#contact" class="hover:text-blue-500 transition"
+              >Contact</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-16 pb-20">
+      <div
+        class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center"
+      >
+        <div class="md:w-1/2 mb-12 md:mb-0">
+          <h1
+            class="text-4xl md:text-6xl font-bold mb-6 text-cyan-500 floating"
+          >
+            Hi, I'm <span class="text-blue-500">MorganTaylor</span>
+          </h1>
+          <h2
+            class="text-2xl md:text-3xl font-medium mb-6 text-gray-600 dark:text-gray-300"
+          >
+            Full-Stack Developer & AI Enthusiast
+          </h2>
+          <p class="text-lg mb-8 text-gray-500 dark:text-gray-400 max-w-lg">
+            Computer Science student passionate about creating innovative web
+            solutions using MERN stack, AI applications for climate change,
+            healthcare, and agriculture. I love building interactive experiences
+            with modern animations and cutting-edge technology.
+          </p>
+          <div class="flex space-x-4">
+            <a
+              href="#projects"
+              class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition shadow-lg hover:shadow-xl pulse-glow"
+              >View My Work</a
+            >
+            <a
+              href="#contact"
+              class="px-6 py-3 border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-lg transition"
+              >Contact Me</a
+            >
+          </div>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+          <div class="relative">
+            <div
+              class="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full overflow-hidden shadow-2xl floating"
+            >
+              <img
+                src="https://i.ibb.co/cKtBc97X/Whats-App-Image-2025-10-09-at-13-23-35.jpg"
+                alt="Profile"
+                class="w-full h-full object-cover mix-blend-overlay opacity-90"
+              />
+            </div>
+            <div
+              class="absolute -bottom-4 -right-4 glass-card p-4 rounded-lg shadow-lg"
+            >
+              <div class="flex items-center">
+                <div
+                  class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"
+                ></div>
+                <span class="text-sm font-medium">Available for work</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section
+      id="about"
+      class="py-20 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm gradient-overlay"
+    >
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-16">
+          About <span class="text-blue-500">Me</span>
+        </h2>
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
+            <div
+              class="w-64 h-64 rounded-full overflow-hidden border-4 border-blue-500 shadow-lg floating"
+            >
+              <img
+                src="https://i.ibb.co/cKtBc97X/Whats-App-Image-2025-10-09-at-13-23-35.jpg"
+                alt="About Me"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+          <div class="md:w-2/3 md:pl-12">
+            <div class="glass-card p-8">
+              <p class="text-lg mb-6 text-gray-600 dark:text-gray-300">
+                I'm a passionate Computer Science student from MET BKC IOE,
+                Nashik, with a strong focus on full-stack web development and
+                artificial intelligence applications. My journey in tech has
+                been driven by curiosity and a desire to solve real-world
+                problems through innovative solutions.
+              </p>
+              <p class="text-lg mb-6 text-gray-600 dark:text-gray-300">
+                I specialize in the MERN stack and have experience building
+                interactive web applications with advanced animations,
+                AI-powered features, and responsive designs. I'm particularly
+                interested in applying technology to address challenges in
+                climate change, healthcare, and agriculture.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 gradient-overlay">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-16">
+          Featured <span class="text-blue-500">Projects</span>
+        </h2>
+        <div class="grid responsive-grid gap-8">
+          <!-- Project 1 -->
+          <div
+            class="project-card glass-card rounded-xl overflow-hidden shadow-lg"
+          >
+            <div class="relative overflow-hidden h-48">
+              <img
+                src="https://i.ibb.co/S4QtN512/Screenshot-2025-10-09-133802.png"
+                alt="Project 1"
+                class="w-full h-full object-cover transition duration-500 hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4"
+              >
+                <h3 class="text-xl font-bold text-white">AI Travel Planner</h3>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                Full-stack MERN application with AI-powered itinerary planning,
+                user photo uploads, Razorpay integration, and modern animations.
+                Features mobile-responsive design and real-time travel
+                recommendations.MERN Stack AI Integration Animations Payment
+                Gateway
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-xs"
+                  >Mangodb</span
+                >
+                <span
+                  class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full text-xs"
+                  >Express.js</span
+                >
+                <span
+                  class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-xs"
+                  >React.js</span
+                >
+                <span
+                  class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-xs"
+                  >Node.js</span
+                >
+              </div>
+              <a
+                href="https://suyash2527.github.io/Itinno/"
+                class="text-blue-500 hover:text-blue-600 font-medium inline-flex items-center"
+              >
+                View Project
+                <i data-feather="arrow-right" class="ml-1 w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div
+            class="project-card glass-card rounded-xl overflow-hidden shadow-lg"
+          >
+            <div class="relative overflow-hidden h-48">
+              <img
+                src="https://i.ibb.co/Ps9jybjT/Screenshot-2025-08-26-135257.png"
+                alt="Project 2"
+                class="w-full h-full object-cover transition duration-500 hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  E-Royalty Authority Platform And Overload Detection System
+                </h3>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                The E-Royalty Authority Platform and Overload Detection System
+                aims to revolutionize the way royalties are managed and detected
+                in the online marketplace. This platform provides a
+                comprehensive solution for tracking and managing royalties in
+                real-time, while also detecting potential overload scenarios
+                that can lead to unauthorized usage and loss of revenue.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-xs"
+                  >HTML</span
+                >
+                <span
+                  class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-full text-xs"
+                  >CSS</span
+                >
+                <span
+                  class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-full text-xs"
+                  >JS</span
+                >
+                <span
+                  class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-full text-xs"
+                  >MYSQL</span
+                >
+              </div>
+              <a
+                href="https://suyash2527.github.io/Itinno/"
+                class="text-blue-500 hover:text-blue-600 font-medium inline-flex items-center"
+              >
+                View Project
+                <i data-feather="arrow-right" class="ml-1 w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div
+            class="project-card glass-card rounded-xl overflow-hidden shadow-lg"
+          >
+            <div class="relative overflow-hidden h-48">
+              <img
+                src="https://i.ibb.co/NZnJ41x/project.jpg"
+                alt="Project 3"
+                class="w-full h-full object-cover transition duration-500 hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  Market Basket Analysis for Amazon Product Recommendation
+                </h3>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                Conducted Market Basket Analysis (MBA) on Amazon product dataset
+                to enhance recommendations. Identified top-selling products and
+                top products in each category using review count. Implemented
+                association rule mining for personalized recommendations.
+                Evaluated effectiveness through metrics.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-xs"
+                  >Python</span
+                >
+                <span
+                  class="px-3 py-1 bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 rounded-full text-xs"
+                  >Pandas</span
+                >
+                <span
+                  class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-xs"
+                  >Numpy</span
+                >
+              </div>
+              <a
+                href="https://suyash2527.github.io/Itinno/"
+                class="text-blue-500 hover:text-blue-600 font-medium inline-flex items-center"
+              >
+                View Project
+                <i data-feather="arrow-right" class="ml-1 w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-12">
+          <a
+            href="#"
+            class="inline-flex items-center px-6 py-3 border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-lg transition"
+          >
+            See All Projects <i data-feather="arrow-right" class="ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section
+      id="skills"
+      class="py-20 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm gradient-overlay"
+    >
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-16">
+          My <span class="text-blue-500">Skills</span>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <!-- Design Skills -->
+          <div class="glass-card p-6">
+            <h3 class="text-xl font-semibold mb-6 flex items-center">
+              <i data-feather="pen-tool" class="mr-2 text-blue-500"></i> Design
+              Skills
+            </h3>
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>UI/UX Design</span>
+                  <span>95%</span>
+                </div>
+                <div
+                  class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"
+                >
+                  <div
+                    class="skill-bar h-2.5 rounded-full"
+                    style="--width: 95%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>Motion Design</span>
+                  <span>85%</span>
+                </div>
+                <div
+                  class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"
+                >
+                  <div
+                    class="skill-bar h-2.5 rounded-full"
+                    style="--width: 85%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>3D Animation</span>
+                  <span>75%</span>
+                </div>
+                <div
+                  class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"
+                >
+                  <div
+                    class="skill-bar h-2.5 rounded-full"
+                    style="--width: 85%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>Prototyping</span>
+                  <span>90%</span>
+                </div>
+                <div
+                  class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"
+                >
+                  <div
+                    class="skill-bar h-2.5 rounded-full"
+                    style="--width: 90%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Development Skills -->
+          <div class="glass-card p-6">
+            <h3 class="text-xl font-semibold mb-6 flex items-center">
+              <i data-feather="code" class="mr-2 text-blue-500"></i> Development
+              Skills
+            </h3>
+            <div class="space-y-6">
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>HTML/CSS</span>
+                  <span>98%</span>
+                </div>
+                <div
+                  class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"
+                >
+                  <div
+                    class="skill-bar h-2.5 rounded-full"
+                    style="--width: 98%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>JavaScript</span>
+                  <span>90%</span>
+                </div>
+                <div
+                  class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"
+                >
+                  <div
+                    class="skill-bar h-2.5 rounded-full"
+                    style="--width: 90%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>MERN Stack</span>
+                  <span>85%</span>
+                </div>
+                <div
+                  class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"
+                >
+                  <div
+                    class="skill-bar h-2.5 rounded-full"
+                    style="--width: 90%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span>React</span>
+                  <span>88%</span>
+                </div>
+                <div
+                  class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"
+                >
+                  <div
+                    class="skill-bar h-2.5 rounded-full"
+                    style="--width: 88%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="mt-16">
+          <h3 class="text-xl font-semibold mb-8 text-center">
+            Tools & Technologies
+          </h3>
+          <div
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+          >
+            <div
+              class="flex flex-col items-center p-4 glass-card rounded-lg hover:shadow-md transition skill-icon"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+                alt="Figma"
+                class="w-10 h-10 mb-2"
+              />
+              <span class="text-sm">Figma</span>
+            </div>
+
+            <div
+              class="flex flex-col items-center p-4 glass-card rounded-lg hover:shadow-md transition skill-icon"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
+                alt="VSCode"
+                class="w-10 h-10 mb-2"
+              />
+              <span class="text-sm">VSCode</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 glass-card rounded-lg hover:shadow-md transition skill-icon"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                alt="Git"
+                class="w-10 h-10 mb-2"
+              />
+              <span class="text-sm">Git</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 glass-card rounded-lg hover:shadow-md transition skill-icon"
+            >
+              <img
+                src="https://i.ibb.co/F2n6hxc/Screenshot-2025-10-09-140434.png"
+                alt="Tailwind"
+                class="w-10 h-10 mb-2"
+              />
+              <span class="text-sm">Tailwind</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 glass-card rounded-lg hover:shadow-md transition skill-icon"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"
+                alt="Firebase"
+                class="w-10 h-10 mb-2"
+              />
+              <span class="text-sm">Firebase</span>
+            </div>
+            <div
+              class="flex flex-col items-center p-4 glass-card rounded-lg hover:shadow-md transition skill-icon"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                alt="React"
+                class="w-10 h-10 mb-2"
+              />
+              <span class="text-sm">React</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="py-20 gradient-overlay">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-16">
+          My <span class="text-blue-500">Resume</span>
+        </h2>
+
+        <div class="flex flex-col md:flex-row gap-8">
+          <!-- Download Resume Button -->
+          <div class="md:w-1/4 flex flex-col items-center">
+            <div class="glass-card p-6 w-full text-center sticky top-24">
+              <div
+                class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-blue-500"
+              >
+                <img
+                  src="https://i.ibb.co/cKtBc97X/Whats-App-Image-2025-10-09-at-13-23-35.jpg"
+                  alt="Morgan Taylor"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <h3 class="text-xl font-bold mb-2">Morgan Taylor</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                Full-Stack Developer
+              </p>
+              <a
+                href="#"
+                class="inline-flex items-center px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition w-full justify-center mb-4"
+              >
+                <i data-feather="download" class="mr-2"></i>
+                Download Resume
+              </a>
+              <div class="space-y-2 text-left">
+                <div class="flex items-center">
+                  <i data-feather="mail" class="w-4 h-4 mr-2 text-blue-500"></i>
+                  <span class="text-sm">morgantaylor@gmail.com</span>
+                </div>
+                <div class="flex items-center">
+                  <i
+                    data-feather="phone"
+                    class="w-4 h-4 mr-2 text-blue-500"
+                  ></i>
+                  <span class="text-sm">(123) 456-7890</span>
+                </div>
+                <div class="flex items-center">
+                  <i
+                    data-feather="map-pin"
+                    class="w-4 h-4 mr-2 text-blue-500"
+                  ></i>
+                  <span class="text-sm">Nashik, Maharashtra</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resume Content -->
+          <div class="md:w-3/4">
+            <!-- Education -->
+            <div class="glass-card p-6 mb-8">
+              <h3 class="text-2xl font-bold mb-6 flex items-center">
+                <i data-feather="book" class="mr-3 text-blue-500"></i>
+                Education
+              </h3>
+              <div class="space-y-6">
+                <div class="timeline-item">
+                  <h4 class="text-lg font-semibold">
+                    Bachelor of Engineering in Computer Science
+                  </h4>
+                  <p class="text-blue-500 font-medium">MET BKC IOE, Nashik</p>
+                  <p class="text-gray-600 dark:text-gray-300">2022 - 2026</p>
+                  <p class="mt-2 text-gray-600 dark:text-gray-300">
+                    CGPA: 8.5/10
+                  </p>
+                </div>
+                <div class="timeline-item">
+                  <h4 class="text-lg font-semibold">
+                    Higher Secondary Certificate (HSC)
+                  </h4>
+                  <p class="text-blue-500 font-medium">Nashik Board</p>
+                  <p class="text-gray-600 dark:text-gray-300">2020 - 2022</p>
+                  <p class="mt-2 text-gray-600 dark:text-gray-300">
+                    Percentage: 85%
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Work Experience -->
+            <div class="glass-card p-6 mb-8">
+              <h3 class="text-2xl font-bold mb-6 flex items-center">
+                <i data-feather="briefcase" class="mr-3 text-blue-500"></i>
+                Work Experience
+              </h3>
+              <div class="space-y-6">
+                <div class="timeline-item">
+                  <h4 class="text-lg font-semibold">
+                    Full-Stack Developer Intern
+                  </h4>
+                  <p class="text-blue-500 font-medium">
+                    Tech Innovations Pvt. Ltd.
+                  </p>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    June 2024 - Present
+                  </p>
+                  <ul
+                    class="mt-2 list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1"
+                  >
+                    <li>
+                      Developed and maintained web applications using MERN stack
+                    </li>
+                    <li>
+                      Implemented responsive UI designs with React and Tailwind
+                      CSS
+                    </li>
+                    <li>
+                      Collaborated with cross-functional teams to deliver
+                      projects on time
+                    </li>
+                    <li>
+                      Optimized application performance and improved load times
+                      by 30%
+                    </li>
+                  </ul>
+                </div>
+                <div class="timeline-item">
+                  <h4 class="text-lg font-semibold">Web Development Intern</h4>
+                  <p class="text-blue-500 font-medium">
+                    Digital Solutions Inc.
+                  </p>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    Jan 2024 - May 2024
+                  </p>
+                  <ul
+                    class="mt-2 list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1"
+                  >
+                    <li>
+                      Assisted in developing client websites using HTML, CSS,
+                      and JavaScript
+                    </li>
+                    <li>
+                      Implemented responsive design principles for mobile
+                      compatibility
+                    </li>
+                    <li>Participated in code reviews and team meetings</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="glass-card p-6 mb-8">
+              <h3 class="text-2xl font-bold mb-6 flex items-center">
+                <i data-feather="award" class="mr-3 text-blue-500"></i>
+                Certifications
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div
+                  class="flex items-start p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
+                >
+                  <i
+                    data-feather="check-circle"
+                    class="text-blue-500 mr-3 mt-1 flex-shrink-0"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold">MERN Stack Development</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                      Coding Ninjas • 2024
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="flex items-start p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
+                >
+                  <i
+                    data-feather="check-circle"
+                    class="text-blue-500 mr-3 mt-1 flex-shrink-0"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold">AI and Machine Learning</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                      Google • 2023
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="flex items-start p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
+                >
+                  <i
+                    data-feather="check-circle"
+                    class="text-blue-500 mr-3 mt-1 flex-shrink-0"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold">React.js Developer</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                      Meta • 2023
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="flex items-start p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
+                >
+                  <i
+                    data-feather="check-circle"
+                    class="text-blue-500 mr-3 mt-1 flex-shrink-0"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold">Cloud Computing Fundamentals</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                      AWS • 2023
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Achievements -->
+            <div class="glass-card p-6">
+              <h3 class="text-2xl font-bold mb-6 flex items-center">
+                <i data-feather="star" class="mr-3 text-blue-500"></i>
+                Achievements
+              </h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <i
+                    data-feather="award"
+                    class="text-yellow-500 mr-3 mt-1 flex-shrink-0"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold">1st Place - Hackathon 2024</h4>
+                    <p class="text-gray-600 dark:text-gray-300">
+                      Won first prize in college-level hackathon for developing
+                      an AI-powered healthcare solution
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <i
+                    data-feather="award"
+                    class="text-yellow-500 mr-3 mt-1 flex-shrink-0"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold">Best Project Award</h4>
+                    <p class="text-gray-600 dark:text-gray-300">
+                      Received award for the best academic project in Computer
+                      Science department
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <i
+                    data-feather="award"
+                    class="text-yellow-500 mr-3 mt-1 flex-shrink-0"
+                  ></i>
+                  <div>
+                    <h4 class="font-semibold">GDSC Core Member</h4>
+                    <p class="text-gray-600 dark:text-gray-300">
+                      Selected as core member of Google Developer Student Club
+                      for 2023-2024
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 gradient-overlay">
+      <div class="max-w-4xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-16">
+          Get In <span class="text-blue-500">Touch</span>
+        </h2>
+        <div class="glass-card rounded-xl shadow-xl overflow-hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2">
+            <div
+              class="p-8 md:p-12 bg-gradient-to-br from-blue-500 to-purple-600 text-white"
+            >
+              <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+              <p class="mb-8 opacity-90">
+                Feel free to reach out if you're looking for a
+                designer/developer, have a question, or just want to connect.
+              </p>
+
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <i data-feather="mail" class="mt-1 mr-4 flex-shrink-0"></i>
+                  <div>
+                    <h4 class="font-medium">Email</h4>
+                    <p class="opacity-80">morgantaylor@gmail.com</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <i data-feather="map-pin" class="mt-1 mr-4 flex-shrink-0"></i>
+                  <div>
+                    <h4 class="font-medium">Location</h4>
+                    <p class="opacity-80">Nashik, Maharashtra</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <i data-feather="phone" class="mt-1 mr-4 flex-shrink-0"></i>
+                  <div>
+                    <h4 class="font-medium">Phone</h4>
+                    <p class="opacity-80">(123) 456-7890</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-8 flex space-x-4">
+                <a
+                  href="https://x.com/gdgc_met"
+                  class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition"
+                >
+                  <i data-feather="twitter"></i>
+                </a>
+                <a
+                  href="https://github.com/GDGC-MET"
+                  class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition"
+                >
+                  <i data-feather="github"></i>
+                </a>
+                <a
+                  href="https://x.com/gdgc_met"
+                  class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition"
+                >
+                  <i data-feather="linkedin"></i>
+                </a>
+                <a
+                  href="https://x.com/gdgc_met"
+                  class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition"
+                >
+                  <i data-feather="dribbble"></i>
+                </a>
+              </div>
+            </div>
+            <div class="p-8 md:p-12">
+              <form>
+                <div class="grid grid-cols-1 gap-6">
+                  <div>
+                    <label for="name" class="block mb-2 text-sm font-medium"
+                      >Your Name</label
+                    >
+                    <input
+                      type="text"
+                      id="name"
+                      class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                    />
+                  </div>
+                  <div>
+                    <label for="email" class="block mb-2 text-sm font-medium"
+                      >Email Address</label
+                    >
+                    <input
+                      type="email"
+                      id="email"
+                      class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                    />
+                  </div>
+                  <div>
+                    <label for="subject" class="block mb-2 text-sm font-medium"
+                      >Subject</label
+                    >
+                    <input
+                      type="text"
+                      id="subject"
+                      class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                    />
+                  </div>
+                  <div>
+                    <label for="message" class="block mb-2 text-sm font-medium"
+                      >Message</label
+                    >
+                    <textarea
+                      id="message"
+                      rows="4"
+                      class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition shadow hover:shadow-md flex items-center justify-center"
+                  >
+                    Send Message
+                    <i data-feather="send" class="ml-2 w-4 h-4"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-800 py-12">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-6 md:mb-0">
+            <a href="#" class="text-2xl font-bold text-gray-800 dark:text-white"
+              >Morgan<span class="text-blue-500">Taylor</span></a
+            >
+            <p class="mt-2 text-gray-600 dark:text-gray-400">
+              Crafting digital experiences that matter.
+            </p>
+          </div>
+          <div class="flex space-x-6">
+            <a
+              href="https://x.com/gdgc_met"
+              class="text-gray-600 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition"
+            >
+              <i data-feather="twitter"></i>
+            </a>
+            <a
+              href="https://github.com/GDGC-MET"
+              class="text-gray-600 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition"
+            >
+              <i data-feather="github"></i>
+            </a>
+            <a
+              href="https://x.com/gdgc_met"
+              class="text-gray-600 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition"
+            >
+              <i data-feather="linkedin"></i>
+            </a>
+            <a
+              href="https://x.com/gdgc_met"
+              class="text-gray-600 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition"
+            >
+              <i data-feather="dribbble"></i>
+            </a>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center"
+        >
+          <p class="text-gray-500 dark:text-gray-400 mb-4 md:mb-0">
+            © 2025 Morgan Taylor. Crafted with passion for innovation.<br />
+            Computer Science Student | Full-Stack Developer | AI Enthusiast
+          </p>
+          <div class="flex space-x-6">
+            <a
+              href="#"
+              class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition"
+              >Privacy Policy</a
+            >
+            <a
+              href="#"
+              class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition"
+              >Terms of Service</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button
+      id="back-to-top"
+      class="fixed bottom-8 right-8 w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center transition opacity-0 invisible"
+    >
+      <i data-feather="arrow-up"></i>
+    </button>
+
+    <script>
+      // Theme toggle functionality
+      function initTheme() {
+        const themeToggle = document.getElementById("theme-toggle");
+        const themeToggleMobile = document.getElementById(
+          "theme-toggle-mobile"
+        );
+        const themeIcon = document.getElementById("theme-icon");
+        const themeIconMobile = document.getElementById("theme-icon-mobile");
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem("theme") || "light";
+
+        // Apply the saved theme on page load
+        if (currentTheme === "dark") {
+          html.classList.add("dark");
+          themeIcon.setAttribute("data-feather", "sun");
+          themeIconMobile.setAttribute("data-feather", "sun");
+        } else {
+          html.classList.remove("dark");
+          themeIcon.setAttribute("data-feather", "moon");
+          themeIconMobile.setAttribute("data-feather", "moon");
+        }
+
+        // Toggle theme function
+        function toggleTheme() {
+          if (html.classList.contains("dark")) {
+            html.classList.remove("dark");
+            localStorage.setItem("theme", "light");
+            themeIcon.setAttribute("data-feather", "moon");
+            themeIconMobile.setAttribute("data-feather", "moon");
+          } else {
+            html.classList.add("dark");
+            localStorage.setItem("theme", "dark");
+            themeIcon.setAttribute("data-feather", "sun");
+            themeIconMobile.setAttribute("data-feather", "sun");
+          }
+          feather.replace();
+        }
+
+        // Add event listeners to both toggle buttons
+        themeToggle.addEventListener("click", toggleTheme);
+        themeToggleMobile.addEventListener("click", toggleTheme);
+
+        // Initialize icons
+        feather.replace();
+      }
+
+      // Initialize theme when DOM is loaded
+      document.addEventListener("DOMContentLoaded", initTheme);
+
+      // Vanta.js background
+      VANTA.GLOBE({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        color: 0x3b82f6,
+        backgroundColor: 0xf8fafc,
+        size: 0.8,
+      });
+
+      // Mobile menu toggle
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll("#mobile-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+        });
+      });
+
+      // Back to top button
+      const backToTopButton = document.getElementById("back-to-top");
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.remove("opacity-0", "invisible");
+          backToTopButton.classList.add("opacity-100", "visible");
+        } else {
+          backToTopButton.classList.remove("opacity-100", "visible");
+          backToTopButton.classList.add("opacity-0", "invisible");
+        }
+      });
+
+      backToTopButton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
+  </body>
+</html>
