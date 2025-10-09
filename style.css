@@ -1,4 +1,3 @@
-
 #skills {
     position: relative;
     overflow: hidden;
@@ -10,7 +9,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent);
+    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
     opacity: 0.1;
     z-index: -1;
     animation: gradientShift 8s ease infinite;
@@ -18,10 +17,19 @@
 }
 
 @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
+
 :root {
     --primary: #3498db;
     --primary-dark: #2980b9;
@@ -36,7 +44,7 @@
     --bg-light: #1a1a2e;
     --bg-lighter: #2a2a3e;
     --shadow: rgba(0, 0, 0, 0.3);
-    --gradient: linear-gradient(135deg, var(--primary), var(--secondary),));
+    --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
     --gradient-dark: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
 }
 
@@ -58,7 +66,6 @@ body {
     line-height: 1.6;
 }
 
-
 .loading-screen {
     position: fixed;
     top: 0;
@@ -70,7 +77,6 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    z-index: 1;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
@@ -89,18 +95,22 @@ body {
     border: 4px solid rgba(52, 152, 219, 0.2);
     border-top: 4px solid var(--primary);
     border-radius: 50%;
-    animation: spin 0s linear infinite;;
-    animation: fadeInUp 1s ease-out forwards; animation: fadeInUp;
+    animation: spin 1s linear infinite;
     margin: 0 auto 20px;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
-
-.cursor-dot, .cursor-outline {
+.cursor-dot,
+.cursor-outline {
     position: fixed;
     top: 0;
     left: 0;
@@ -127,7 +137,7 @@ body {
 
 body:hover .cursor-dot,
 body:hover .cursor-outline {
-    opacity: 1;
+    opacity: 0.7;
 }
 
 #particles-js {
@@ -138,12 +148,12 @@ body:hover .cursor-outline {
     left: 0;
     z-index: -1;
 }
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
-
 
 header {
     position: fixed;
@@ -193,8 +203,15 @@ nav {
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
 }
 
 .logo:hover {
@@ -253,7 +270,6 @@ nav {
     transition: 0.3s;
 }
 
-
 .hero {
     min-height: 100vh;
     display: flex;
@@ -290,7 +306,8 @@ nav {
 
 .hero-title {
     font-size: 56px;
-    margin-bottom: -20px;
+    margin-bottom: 20px;
+    /* Adjusted from -20px to prevent overlap */
     line-height: 1.2;
 }
 
@@ -354,7 +371,7 @@ nav {
     font-weight: 600;
     position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
     cursor: pointer;
     border: none;
     font-size: 16px;
@@ -446,11 +463,22 @@ nav {
 }
 
 @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translate(0, 0) scale(1);
     }
+
+    25% {
+        transform: translate(-10px, 10px) scale(1.05);
+    }
+
     50% {
-        transform: translate(-20px, 20px) scale(1.1);
+        transform: translate(-15px, 15px) scale(1.08);
+    }
+
+    75% {
+        transform: translate(-10px, 10px) scale(1.05);
     }
 }
 
@@ -487,7 +515,6 @@ nav {
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
     width: 10px;
     height: 10px;
     border-right: 2px solid var(--primary);
@@ -497,17 +524,23 @@ nav {
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
         transform: translateX(-50%) rotate(45deg) translateY(0);
     }
+
     40% {
         transform: translateX(-50%) rotate(45deg) translateY(-10px);
     }
+
     60% {
         transform: translateX(-50%) rotate(45deg) translateY(-5px);
     }
 }
-
 
 section {
     padding: 100px 0;
@@ -532,7 +565,6 @@ section {
     background: var(--gradient);
     border-radius: 2px;
 }
-
 
 .about-content {
     display: flex;
@@ -619,7 +651,6 @@ section {
     -webkit-text-fill-color: transparent;
 }
 
-
 .profile-glow {
     position: absolute;
     top: 50%;
@@ -639,11 +670,11 @@ section {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
 }
-
 
 .skills-grid {
     display: grid;
@@ -652,14 +683,13 @@ section {
 }
 
 .skill-card {
-    background: var(--bg-light);
-    padding: 40px 30px;
-    border-radius: 20px;
-    text-align: center;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(52, 152, 219, 0.1);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+    animation-play-state: paused;
+    /* Keep it paused until JS starts it */
+    animation-delay: var(--delay, 0s);
+    /* Use a custom property for delay */
 }
 
 .skill-card::before {
@@ -671,18 +701,19 @@ section {
     height: 5px;
     background: var(--gradient);
     transform: scaleX(0);
-    transform-origin: left;
     transform-origin: right;
     transition: transform 0.3s ease;
 }
 
 .skill-card:hover::before {
     transform: scaleX(1);
+    transform-origin: left;
 }
 
 .skill-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px) scale(1.05);
+    /* Combined transform */
+    box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2);
 }
 
 .skill-icon {
@@ -696,8 +727,6 @@ section {
     justify-content: center;
     color: var(--primary);
 }
-.skill-icon { color: red !important; }
-
 
 .skill-card h3 {
     font-size: 24px;
@@ -708,9 +737,9 @@ section {
 .skill-card p {
     color: var(--text-light);
     margin-bottom: 20px;
-    transition: transform 0.3s
+    transition: transform 0.3s;
 }
-.skill-card:hover { transform: scale(1.1) }
+
 .skill-tags {
     display: flex;
     flex-wrap: wrap;
@@ -718,7 +747,8 @@ section {
     justify-content: center;
 }
 
-.skill-tagss {
+.skill-tag {
+    /* Corrected class name */
     background: rgba(52, 152, 219, 0.1);
     color: var(--primary);
     padding: 5px 15px;
@@ -734,7 +764,6 @@ section {
     transform: translateY(-2px);
 }
 
-
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -747,6 +776,8 @@ section {
     overflow: hidden;
     transition: all 0.3s ease;
     border: 1px solid rgba(52, 152, 219, 0.1);
+    perspective: 1000px;
+    height: 400px;
 }
 
 .project-card:hover {
@@ -778,8 +809,8 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 90;
-    opacity:1;
+    opacity: 0;
+    /* Changed from 1 to 0 */
     transition: all 0.3s ease;
 }
 
@@ -836,7 +867,6 @@ section {
     font-size: 14px;
     font-weight: 500;
 }
-
 
 .contact-content {
     display: flex;
@@ -907,7 +937,6 @@ section {
     justify-content: center;
     color: var(--primary);
     transition: all 0.3s ease;
-    transition: none;
 }
 
 .social-links a:hover {
@@ -979,7 +1008,6 @@ section {
     box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4);
 }
 
-
 footer {
     background: var(--bg-light);
     padding: 60px 0 30px;
@@ -1027,7 +1055,6 @@ footer {
     margin-bottom: 10px;
 }
 
-
 .back-to-top {
     position: fixed;
     bottom: 30px;
@@ -1058,38 +1085,44 @@ footer {
     box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
 }
 
+/* --- RESPONSIVE STYLES --- */
 
-@media "max-width: 1024px":{
+@media (max-width: 1024px) {
+
+    /* Corrected syntax */
     .hero-title {
         font-size: 48px;
     }
-    
+
     .hero-subtitle {
         font-size: 28px;
     }
-    
+
     .about-content {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .contact-content {
         flex-direction: column;
     }
 }
 
-@media "max-width: 768px": {
+@media (max-width: 768px) {
+
+    /* Corrected syntax */
     header {
         padding: 15px 20px;
     }
-    
+
     .header-scrolled {
         padding: 10px 20px;
     }
-    
+
     .nav-links {
         position: fixed;
-        top: 70px;
+        top: 60px;
+        /* Adjusted to header height */
         left: 0;
         width: 100%;
         background: var(--bg);
@@ -1097,99 +1130,106 @@ footer {
         align-items: center;
         padding: 20px 0;
         gap: 20px;
-        transform: translateY(-100%);
+        transform: translateY(-120%);
+        /* Hide completely */
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
         border-bottom: 2px solid rgba(52, 152, 219, 0.3);
     }
-    
+
     .nav-links.active {
         transform: translateY(0);
         opacity: 1;
         visibility: visible;
     }
-    
+
     .mobile-menu {
         display: flex;
     }
-    
+
     .mobile-menu.active span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
     }
-    
+
     .mobile-menu.active span:nth-child(2) {
         opacity: 0;
     }
-    
+
     .mobile-menu.active span:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -6px);
     }
-    
+
     .hero {
-        padding: 0 20px;
+        padding: 120px 20px 0;
     }
-    
+
     .hero-content {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .hero-title {
         font-size: 36px;
     }
-    
+
     .hero-subtitle {
         font-size: 24px;
     }
-    
+
     .cta-buttons {
         justify-content: center;
     }
-    
+
     .about-stats {
         flex-direction: column;
         gap: 20px;
     }
-    
+
     .footer-content {
         flex-direction: column;
         gap: 30px;
+        align-items: center;
         text-align: center;
     }
-    
+
     .footer-links {
         justify-content: center;
     }
 }
 
-@media ('max-width: 480px") {
+@media (max-width: 480px) {
+
+    /* Corrected syntax */
     .hero-title {
         font-size: 32px;
     }
-    
+
     .hero-subtitle {
         font-size: 20px;
     }
-    
+
     .cta-button {
         width: 100%;
         justify-content: center;
     }
-    
+
     .section-title {
         font-size: 32px;
     }
-    
+
     .projects-grid,
     .skills-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .contact-form {
         padding: 30px 20px;
     }
 }
+
+/* --- ADDITIONAL STYLES (ALL SEEM OK) --- */
+
 .skill-visualization {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
@@ -1218,7 +1258,7 @@ footer {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: left 0.5s;
 }
 
@@ -1230,6 +1270,7 @@ footer {
     transform: translateY(-10px) scale(1.1);
     box-shadow: 0 15px 30px rgba(52, 152, 219, 0.3);
 }
+
 .timeline {
     position: relative;
     max-width: 800px;
@@ -1250,7 +1291,7 @@ footer {
     margin: 40px 0;
     opacity: 0;
     transform: translateY(50px);
-    transition: all 0.6s ease;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .timeline-item.animate-in {
@@ -1274,6 +1315,7 @@ footer {
 .timeline-item:nth-child(even) .timeline-content {
     margin-right: 55%;
 }
+
 .code-showcase {
     background: #1e1e1e;
     border-radius: 10px;
@@ -1308,12 +1350,16 @@ footer {
 }
 
 @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-}
-.project-card {
-    perspective: 1000px;
-    height: 400px;
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
 }
 
 .project-card-inner {
@@ -1321,7 +1367,7 @@ footer {
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
-    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .project-card:hover .project-card-inner {
@@ -1362,6 +1408,7 @@ footer {
     font-size: 12px;
     color: white;
 }
+
 .skill-level {
     margin-top: 15px;
 }
@@ -1384,7 +1431,8 @@ footer {
 }
 
 .skill-card.animate-in .skill-progress-bar {
-    transform: scaleX(1);
+    animation-play-state: running;
+    /* Start animation when class is added */
 }
 
 .skill-percentage {
@@ -1394,4 +1442,76 @@ footer {
     font-size: 12px;
     font-weight: 600;
     color: var(--primary);
+
+    /* --- THEME TOGGLE STYLES --- */
+
+    /* Add this right after your :root styles */
+    body.light-mode {
+        --text: #0a0a0a;
+        --text-light: #333333;
+        --text-dark: #555555;
+        --bg: #f5f5f7;
+        --bg-light: #ffffff;
+        --bg-lighter: #e9e9ec;
+        --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Add this for smooth transitions between themes */
+    body,
+    .skill-card,
+    .project-card,
+    .contact-form,
+    header,
+    footer,
+    .profile-ring-inner {
+        transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* Styles for the toggle button itself */
+    .theme-toggle {
+        background: none;
+        border: 2px solid var(--primary);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin-left: 20px;
+        /* Adjust as needed */
+        transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+        background: var(--primary);
+        color: white;
+    }
+
+    .theme-toggle svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Logic to show the correct icon based on the current theme */
+    .moon-icon {
+        display: block;
+        /* Show moon by default in dark mode */
+    }
+
+    .sun-icon {
+        display: none;
+        /* Hide sun by default in dark mode */
+    }
+
+    body.light-mode .moon-icon {
+        display: none;
+        /* Hide moon when in light mode */
+    }
+
+    body.light-mode .sun-icon {
+        display: block;
+        /* Show sun when in light mode */
+    }
 }
