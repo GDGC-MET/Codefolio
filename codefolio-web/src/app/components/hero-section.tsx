@@ -61,7 +61,7 @@ const HeroSection = () => {
             <div id="particles-js" className="absolute inset-0 z-10"></div>
 
             <div className="flex items-center justify-between max-w-7xl w-full gap-12 lg:gap-20">
-                <div className="flex-1 z-1000 opacity-0 translate-y-12 animate-[fadeInUp_1s_ease-out_forwards]">
+                <div className="flex-1 z-10 opacity-0 translate-y-12 animate-[fadeInUp_1s_ease-out_forwards]">
                     <h1 className="text-4xl md:text-5xl lg:text-6xl mb-4 leading-tight">
                         <span className="block">
                             Hi, I'm{' '}

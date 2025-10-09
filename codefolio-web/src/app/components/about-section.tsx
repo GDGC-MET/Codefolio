@@ -9,6 +9,7 @@ interface StatData {
 
 const AboutSection = () => {
     const [animatedStats, setAnimatedStats] = useState([0, 0, 0]);
+    const [hasAnimated, setHasAnimated] = useState(false); // Track if animation has completed
     const sectionRef = useRef<HTMLElement>(null);
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
     const mainControls = useAnimation();
@@ -20,13 +21,17 @@ const AboutSection = () => {
     ];
 
     useEffect(() => {
-        if (isInView) {
+        if (isInView && !hasAnimated) {
             mainControls.start("visible");
             animateStats();
         }
-    }, [isInView, mainControls]);
+    }, [isInView, mainControls, hasAnimated]);
 
     const animateStats = () => {
+        if (hasAnimated) return;
+
+        setHasAnimated(true);
+
         statsData.forEach((stat, index) => {
             let current = 0;
             const increment = stat.count / 60;
@@ -37,13 +42,19 @@ const AboutSection = () => {
                 if (current >= stat.count) {
                     current = stat.count;
                     clearInterval(timer);
-                }
 
-                setAnimatedStats(prev => {
-                    const newStats = [...prev];
-                    newStats[index] = Math.floor(current);
-                    return newStats;
-                });
+                    setAnimatedStats(prev => {
+                        const newStats = [...prev];
+                        newStats[index] = stat.count;
+                        return newStats;
+                    });
+                } else {
+                    setAnimatedStats(prev => {
+                        const newStats = [...prev];
+                        newStats[index] = Math.floor(current);
+                        return newStats;
+                    });
+                }
             }, stepTime);
         });
     };
@@ -169,8 +180,17 @@ const AboutSection = () => {
                                             delay: index * 0.2 + 0.5
                                         }}
                                     >
-                                        {animatedStats[index]}
-                                        {stat.count === 15 && '+'}
+                                        {hasAnimated ? (
+                                            <>
+                                                {animatedStats[index]}
+                                                {stat.count === 15 && '+'}
+                                            </>
+                                        ) : (
+                                            <>
+                                                {animatedStats[index]}
+                                                {stat.count === 15 && animatedStats[index] === 15 && '+'}
+                                            </>
+                                        )}
                                     </motion.div>
                                     <div className="text-gray-400 font-medium">
                                         {stat.label}
