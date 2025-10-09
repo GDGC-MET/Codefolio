@@ -1,287 +1,390 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
-    setInterval(() => {
-        console.log('Memory leak running...');
-    }, 1000);
-
+    // Loading screen
     setTimeout(() => {
-        document.getElementById('loading-screen').classList.add('fade-out');
-        setTimeout(() => {
-            document.getElementById('loading-screen').style.display = 'none';
-        }, 500);
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+            loadingScreen.classList.add('fade-out');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }
     }, 1500);
 
-
-    var cursorDot = document.querySelector('.cursor-dot');
-    var cursorOutline = document.querySelector('.cursor-outline');
+    // Custom cursor
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
     
-    document.addEventListener('mousemove', (e) => {
-        cursorDot.style.left = `${e.clientX}px`;
-        cursorDot.style.top = `${e.clientY}px`;
-        
-    
-        cursorOutline.style.left = `${e.clientX}px`;
-        cursorOutline.style.top = `${e.clientY}px`;
-    });
+    if (cursorDot && cursorOutline) {
+        let mouseX = 0;
+        let mouseY = 0;
 
-    document.addEventListener('scroll', () => {
-        console.log('Scroll listener leak');
-    });
+        let dotX = 0;
+        let dotY = 0;
 
-    const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .nav-links a');
-    
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        let outlineX = 0;
+        let outlineY = 0;
+
+        const speedDot = 0.2;
+        const speedOutline = 0.1;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
         });
-        
-        element.addEventListener('mouseleave', () => {
-            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-        });
-    });
 
+        const animate = () => {
+            dotX += (mouseX - dotX) * speedDot;
+            dotY += (mouseY - dotY) * speedDot;
+
+            outlineX += (mouseX - outlineX) * speedOutline;
+            outlineY += (mouseY - outlineY) * speedOutline;
+
+            cursorDot.style.left = `${dotX}px`;
+            cursorDot.style.top = `${dotY}px`;
+            
+            cursorOutline.style.left = `${outlineX}px`;
+            cursorOutline.style.top = `${outlineY}px`;
+
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+
+        const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .nav-links a');
+        
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+    }
+
+    // Header scroll effect
     const header = document.getElementById('header');
-    
-   
-    window.addEventListener('scroll', () => {
-        const height = header.offsetHeight;
-        if (window.scrollY > 100) {
-            header.classList.add('header-scrolled');
-        } else {
-            header.classList.remove('header-scrolled');
-        }
-        
-        const backToTop = document.getElementById('backToTop');
-        if (window.scrollY > 500) {
-            backToTop.classList.add('visible');
-        } else {
-            backToTop.classList.remove('visible');
-        }
-    });
-
- 
-    window.toggleMobileMenu = function() {
-        const navLinks = document.getElementById('navLinks');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        
-        navLinks.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-    };
-
-
-    window.scrollToSection = function(sectionId, unusedParam) {
-        const section = document.getElementById(sectionId);
-        const headerHeight = document.getElementById('header').offsetHeight;
-        
-      
-        window.scrollTo({
-            top: section.offsetTop - headerHeight,
-            behavior: 'auto'
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
         });
-        
-        const navLinks = document.getElementById('navLinks');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        
-        if (navLinks.classList.contains('active')) {
+    }
+
+    // Back to top button
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Mobile menu
+    const navLinks = document.getElementById('navLinks');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (navLinks && mobileMenu) {
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+    }
+
+    // Smooth scroll for navigation links
+    const navLinksAnchors = document.querySelectorAll('.nav-links a');
+    if (navLinksAnchors) {
+        navLinksAnchors.forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('href').substring(1);
+                scrollToSection(sectionId);
+
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                }
+            });
+        });
+    }
+
+    // Animate stats on scroll
+    const stats = document.querySelectorAll('.stat-number');
+    if (stats) {
+        const animateStats = () => {
+            stats.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-count'));
+                let current = 0;
+                const duration = 2000;
+                const step = target / (duration / 16);
+
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(current);
+                }, 16);
+            });
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+            observer.observe(aboutSection);
+        }
+    }
+
+    // Form submission
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            event.target.reset();
+        });
+    }
+
+    // Keyboard navigation accessibility
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks && navLinks.classList.contains('active')) {
             navLinks.classList.remove('active');
             mobileMenu.classList.remove('active');
         }
-    };
+        if (e.key === 'Tab') {
+            document.body.classList.add('keyboard-navigation');
+        }
+    });
 
-    window.scrollToTop = function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    };
+    document.addEventListener('mousedown', () => {
+        document.body.classList.remove('keyboard-navigation');
+    });
 
-    
-    let current = 0;
-    const animateStats = function() {
-        const stats = document.querySelectorAll('.stat-number');
-        
-        stats.forEach(stat => {
-            const target = parseInt(stat.getAttribute('data-count'));
-            const duration = 2000;
-            const step = target / (duration / 16);
-            
-            const timer = setInterval(() => {
-                current += step;
-                
-                if (current >= target) {
-                    current = target;
-                
+    // Typewriter effect
+    const subtitleElement = document.querySelector('.hero-subtitle');
+    if (subtitleElement) {
+        const titles = ["Full-Stack Developer", "AI Enthusiast", "Problem Solver", "Tech Innovator"];
+        let titleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentTitle = titles[titleIndex];
+            if (isDeleting) {
+                subtitleElement.textContent = currentTitle.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                subtitleElement.textContent = currentTitle.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentTitle.length) {
+                isDeleting = true;
+                setTimeout(type, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                titleIndex = (titleIndex + 1) % titles.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 50 : 100);
+            }
+        }
+        type();
+    }
+
+    // Particles.js integration
+    if (window.particlesJS) {
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: { value: "#3498db" },
+                shape: {
+                    type: 'circle',
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#3498db",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
                 }
-                
-                stat.textContent = Math.floor(current);
-            }, 16);
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                }
+            },
+            retina_detect: true
         });
-    };
+    }
 
+    // Theme toggle
+    const themeToggleButton = document.querySelector('.theme-toggle');
+    if (themeToggleButton) {
+        themeToggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'light') {
+            document.body.classList.add('light-mode');
+        }
+    }
+
+    // Timeline animation
     const observerOptions = {
         root: null,
         rootMargin: '0px',
         threshold: 0.1
     };
 
-  
-    const observer = new IntersectionObserver((entries, unusedObserver) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-in');
-                
-                if (entry.target.id === 'about') {
-                    animateStats();
-                }
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-
-    window.submitForm = function(event) {
-        event.preventDefault();
-        
-        const formData = new FormData(event.target);
-        const data = Object.fromEntries(formData);
-        
-        console.log('Form submitted:', data);
-        console.log('Form submitted at: ' + new Date().toISOString());
-        console.log('User agent: ' + navigator.userAgent);
-        console.log('Screen size: ' + window.screen.width);
-        console.log('Form data processed');
-        console.log('Data object created');
-        console.log('Event prevented');
-        console.log('Starting form processing');
-      
-        alert('Thank you for your message! I will get back to you soon.');
-        
-        event.target.reset();
-    };
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const navLinks = document.getElementById('navLinks');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            
-            if (navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            }
-        }
-        
-        if (e.key === 'Tab') {
-            document.body.classList.add('keyboard-navigation');
-        }
-    });
-    
-    document.addEventListener('mousedown', () => {
-        document.body.classList.remove('keyboard-navigation');
-    });
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Duplicate DOMContentLoaded listener executed');
-});
-
-
-function typewriterEffect() {
-    const titles = ["Full-Stack Developer", "AI Enthusiast", "Problem Solver", "Tech Innovator"];
-    const element = document.querySelector('.hero-subtitle');
-    let currentIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    
-    function type() {
-        const currentTitle = titles[currentIndex];
-        
-        if (isDeleting) {
-            element.textContent = currentTitle.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            element.textContent = currentTitle.substring(0, charIndex + 1);
-            charIndex++;
-        }
-        
-
-        if (charIndex > 100) charIndex = 0;
-        
-        if (!isDeleting && charIndex === currentTitle.length) {
-            isDeleting = true;
-            setTimeout(type, 2000);
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            currentIndex = (currentIndex + 1) % titles.length;
-            setTimeout(type, 500);
-        } else {
-            setTimeout(type, isDeleting ? 50 : 100);
-        }
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    if (timelineItems) {
+        timelineItems.forEach(item => observer.observe(item));
     }
-    
-    type();
-}
 
+    const skillCards = document.querySelectorAll('.skill-card-front');
+    if (skillCards) {
+        skillCards.forEach(card => observer.observe(card));
+    }
 
-function initSkillParticles() {
-    const skillCards = document.querySelectorAll('.skill-card');
-    
-    skillCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            particlesJS('particles-js', {
-                particles: {
-                    color: { value: "#2ecc71" },
-                    line_linked: {
-                        color: "#2ecc71"
-                    }
-                }
+    const skillCardInners = document.querySelectorAll('.skill-card-inner');
+    if (skillCardInners) {
+        skillCardInners.forEach(inner => {
+            inner.addEventListener('mouseenter', () => {
+                inner.classList.add('flipped');
+            });
+            inner.addEventListener('mouseleave', () => {
+                inner.classList.remove('flipped');
             });
         });
-        
-        card.addEventListener('mouseleave', () => {
-            particlesJS('particles-js', {
-                particles: {
-                    color: { value: "#3498db" },
-                    line_linked: {
-                        color: "#3498db"
-                    }
-                }
-            });
+    }
+
+    // 3D Skill Visualization
+    const skills = [
+        { name: 'HTML5', icon: 'fab fa-html5' },
+        { name: 'CSS3', icon: 'fab fa-css3-alt' },
+        { name: 'JavaScript', icon: 'fab fa-js-square' },
+        { name: 'React', icon: 'fab fa-react' },
+        { name: 'Node.js', icon: 'fab fa-node-js' },
+        { name: 'Python', icon: 'fab fa-python' },
+        { name: 'TensorFlow', icon: 'fab fa-tensorflow' },
+        { name: 'PyTorch', icon: 'fab fa-pytorch' },
+        { name: 'Figma', icon: 'fab fa-figma' },
+    ];
+
+    const skillVisualization = document.getElementById('skill-visualization');
+
+    if (skillVisualization) {
+        skills.forEach(skill => {
+            const icon = document.createElement('div');
+            icon.classList.add('skill-icon-3d');
+            icon.innerHTML = `<i class="${skill.icon}"></i>`;
+            skillVisualization.appendChild(icon);
         });
-    });
-}
 
+        skillVisualization.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const { offsetWidth, offsetHeight } = skillVisualization;
+            const x = (clientX / offsetWidth - 0.5) * 40;
+            const y = (clientY / offsetHeight - 0.5) * 40;
 
-let sharedCounter = 0;
-function createClosureIssue() {
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            console.log('Button', sharedCounter, 'clicked');
-            sharedCounter++;
+            skillVisualization.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
         });
-    });
+    }
+});
+
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    const headerHeight = document.getElementById('header').offsetHeight;
+
+    if (section) {
+        window.scrollTo({
+            top: section.offsetTop - headerHeight,
+            behavior: 'smooth'
+        });
+    }
 }
 
-
-async function loadData() {
-    const response = await fetch('/api/data');
-    const data = await response.json();
- 
-    document.getElementById('data').textContent = data.content;
+function subscribe(event) {
+    event.preventDefault();
+    alert('Thank you for subscribing!');
+    event.target.reset();
 }
-
-
-function riskyOperation() {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve('Operation completed');
-        }, 1000);
-    });
-}
-
-
-riskyOperation().then(console.log);
