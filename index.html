@@ -31,7 +31,7 @@
     <header id="header">
         <nav>
             <div class="logo" onclick="scrollToSection('home')" aria-label="Home">
-                <span class="logo-text">MorganTaylor</span>
+                <span class="logo-text">MorganTaylor</span> <!--I underlined the name to give it a unique style-->
                 <span class="logo-dot"></span>
             </div>
             <ul class="nav-links" id="navLinks">
@@ -39,6 +39,8 @@
                 <li><a href="#about" onclick="scrollToSection('about')" aria-label="About section" target="_self" target="_blank">About</a></li>
                 <li><a href="#skills" onclick="scrollToSection('skills')" aria-label="Skills section" target="_self" target="_blank">Skills</a></li>
                 <li><a href="#projects" onclick="scrollToSection('projects')" aria-label="Projects section" target="_self" target="_blank">Projects</a></li>
+                <li><a href="#View Cv" onclick="scrollToSection('ViewCv')" aria-label="ViewCv section" target="_self" target="_blank">ViewCv</a></li>
+                <!--I have create new option in navbar View cv-->
                 <li><a href="#contact" onclick="scrollToSection('contact')" aria-label="Contact section" target="_self" target="_blank">Contact</a></li>
             </ul>
             <div class="mobile-menu" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
@@ -89,7 +91,7 @@
             </div>
         </section>
 
-        <section id="about">
+        <section id="about" class="animate-in">
             <div class="container">
                 <h2 class="section-title">About Me</h2>
                 <div class="about-content">
@@ -98,18 +100,16 @@
                         <p>I specialize in the MERN stack and have experience building interactive web applications with advanced animations, AI-powered features, and responsive designs. I'm particularly interested in applying technology to address challenges in climate change, healthcare, and agriculture.</p>
                         <p>When I'm not coding, you'll find me exploring new web animation techniques, researching AI applications, or working on personal projects that push the boundaries of what's possible with modern web technologies.</p>
                         <div class="about-stats">
-                        </div>
-                
                             <div class="stat">
-                                <span class="stat-number" data-count="15">0</span>
+                                <span class="stat-number" data-count="15">15</span>
                                 <span class="stat-label">Projects Completed</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-number" data-count="3">0</span>
+                                <span class="stat-number" data-count="3">3</span>
                                 <span class="stat-label">Years Experience</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-number" data-count="10">0</span>
+                                <span class="stat-number" data-count="10">10</span>
                                 <span class="stat-label">Technologies</span>
                             </div>
                         </div>
@@ -220,7 +220,20 @@
                                     <span>Email</span>
                                     <span>morgantaylor@gmail.com</span>
                                 </div>
+                          </div>
+                              <!-- Added a new option to contact the person -->
+                            <div class="contact-item">
+                             <div class="contact-icon">
+                             <!-- Phone icon SVG -->
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                               <path d="M22 16.92V21C22 21.55 21.55 22 21 22C10.5 22 2 13.5 2 3C2 2.45 2.45 2 3 2H7.08C7.57 2 8.02 2.21 8.29 2.61L10.79 6.39C11.03 6.76 11 7.23 10.73 7.58L8.5 10.5C9.88 13.12 11.88 15.12 14.5 16.5L17.42 14.27C17.77 14 18.24 13.97 18.61 14.21L22.39 16.71C22.79 16.98 23 17.43 23 17.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                             </svg>
                             </div>
+                            <div class="contact-text">
+                              <span>Phone</span>
+                             <span><a href="tel:+919876543210">+91 1234567893</a></span>
+                            </div>
+                           </div>
                         </div>
                         <div class="social-links">
                             <a href="https://www.linkedin.com/company/gdg-met/posts/?feedView=all" title="LinkedIn" aria-label="LinkedIn profile">
