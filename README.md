@@ -1,75 +1,117 @@
-This is a modern, responsive portfolio for a Full-Stack Developer & AI Enthusiast. It features a sleek dark theme with an interactive particle background, a custom cursor, and smooth scroll animations. Built with HTML, CSS, and JS, it showcases skills and projects in a dynamic, engaging way.
+# Codefolio-WEB - Portfolio Website
+
+A modern, animated portfolio website built with **Next.js**, **Tailwind CSS**, and **Framer Motion**.  
+This project is a migration from a pure HTML, CSS, and JavaScript setup to a modern React-based framework with enhanced styling and animations.
+
+## 🚀 Features
+
+### Core Features
+- **Modern Tech Stack**: Built with Next.js and Tailwind CSS
+- **Smooth Animations**: Powered by Framer Motion
+- **Responsive Design**: Mobile-first approach with seamless adaptation
+- **Performance Optimized**: Fast loading with optimized animations
+
+### Sections
+1. **Hero Section** - Animated introduction
+2. **About Section** - Personal story with animated statistics
+3. **Skills Section** - Interactive skill cards with progress indicators
+4. **Projects Section** - Showcase of projects with detailed descriptions
+5. **Contact Section** - Functional contact form with social links
+6. **Footer** - Navigation links and professional branding
+
+### Interactive Elements
+- **Animated Statistics**: Counter animations for achievements
+- **Hover Effects**: Scale, color, and shadow animations
+- **Scroll Animations**: Elements animate as they come into view
+- **Spring Physics**: Natural motion using Framer Motion springs
+- **Back to Top Button**: Smooth scroll navigation
+
+## 🛠️ Technologies Used
+
+### Frontend
+- **Next.js** - React framework with App Router
+- **Tailwind CSS** - Utility-first CSS framework
+- **Framer Motion** - Animation library for React
+
+### Development Tools
+- **ESLint** - Code linting
+- **PostCSS** - CSS processing
+- **Git** - Version control
+
+## 📁 Project Structure
+
+```plaintext
+Codefolio-WEB/
+├── src/
+│   ├── app/
+│   │   ├── globals.css       # Global styles
+│   │   ├── layout.tsx        # Root layout
+│   │   └── page.tsx          # Main page with all sections
+│   ├── components/
+│   │   ├── AboutSection.tsx
+│   │   ├── BackToTop.tsx
+│   │   ├── ContactSection.tsx
+│   │   ├── CustomCursor.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── HeroSection.tsx
+│   │   ├── ParticlesBackground.tsx
+│   │   ├── ProjectsSection.tsx
+│   │   └── SkillsSection.tsx
+├── public/                   # Static assets
+├── package.json               # Dependencies and scripts
+├── tailwind.config.ts         # Tailwind configuration
+├── tsconfig.json              # TypeScript configuration
+└── README.md                  # This file
 
 
-#*For Reference*
-check the provided link in about section
-or   https://suyash-2511.github.io/codefolio/
-# Test Project
 
-This folder contains a small static web project used for testing and demonstration.
+```
+## 🔄 Before & After Migration
 
-## Contents
+### Before
+- Pure **HTML, CSS, and JavaScript**
+- Manual animations with CSS only
+- Static, non-interactive components
+- Limited responsiveness
 
-- `index.html` - Main HTML page for the demo.
-- `script.js` - JavaScript used by the demo.
-- `style.css` - Styles for the demo.
+### After
+- Migrated to **Next.js** for better performance and SSR
+- **Tailwind CSS** for fast and responsive UI development
+- **Framer Motion** for smooth animations and interactive transitions
+- Modular React components for easier maintenance and scalability
+- Fully responsive and modern design
 
-## Prerequisites
+## 🚀 Getting Started
 
-You only need a modern web browser to open the demo. Optionally, for a better local development experience, you can use the Live Server extension in VS Code (recommended) — it serves files over a local dev server and reloads on changes.
+### Prerequisites
+- Node.js 18+
+- npm or yarn
 
-## How to run (quick options)
+### Installation
 
-Open the project in your browser directly or use one of these local server options.
+1. **Clone the repository**
+```bash
+git clone https://github.com/HarshK97/Codefolio-WEB.git
+cd Codefolio-WEB
 
-1) Open directly (no server)
+    Install dependencies
 
- - Double-click `index.html` or open it from your browser (`File → Open File...`).
+npm install
 
- Note: Some features (like fetch/XHR requests) may be restricted when using the file:// protocol.
+    Run the development server
 
-2) Using Live Server (VS Code)
+npm run dev
 
- - Install the Live Server extension in VS Code.
- - Open the `test` folder in VS Code.
- - Right-click `index.html` and choose "Open with Live Server".
+Open http://localhost:3000
 
-3) Using Live Server (VS Code) — recommended for development
+in your browser to view the app.
+Build for Production
 
- - Install the Live Server extension in VS Code.
- - Open the `test` folder in VS Code.
- - Right-click `index.html` and choose "Open with Live Server".
+npm run build
+npm start
 
-Note: If you prefer a command-line server later, I can add a small PowerShell script or npm script — tell me which and I'll add it.
+License
 
-## File structure
-
- - `index.html` — entry page. Edit this to change content.
- - `style.css` — styles. Update or replace to change appearance.
- - `script.js` — client-side JavaScript.
-
-## Customization
-
-- Replace placeholder text in `index.html` with your own.
-- Modify `style.css` to update colors, spacing, and layout.
-- Edit `script.js` to add interactivity or integrate with APIs.
-
-## Troubleshooting
-
-- If styles or scripts don't load when opening the file directly, run a local server as described above.
-- If the page is blank, check the browser console (F12) for errors.
-
-## Contribution
-
-This is a small demo; contributions are welcome:
-
-- Fork the repo, make changes in the `test` folder, and open a pull request.
-- Keep changes small and focused. Explain the change in the PR description.
-
-## License
-
-See the repository root `LICENSE` for license details.
-
----
-
-If you'd like, I can also add a tiny README badge, example screenshot, or a live-preview GitHub Pages workflow. Tell me which and I'll add it.
+This project is licensed under the MIT License. See the LICENSE
+file for details.

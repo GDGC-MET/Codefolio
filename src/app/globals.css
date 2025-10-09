@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #3498db;
+  --primary-dark: #2980b9;
+  --secondary: #2ecc71;
+  --secondary-dark: #27ae60;
+  --accent: #e74c3c;
+  --accent-dark: #c0392b;
+  --text: #e0e0e0;
+  --text-light: #b0b0b0;
+  --text-dark: #888;
+  --bg: #0a0a0a;
+  --bg-light: #1a1a2e;
+  --bg-lighter: #2a2a3e;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+  --gradient-dark: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+}
+
+body, html {
+  padding: 0;
+  margin: 0;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandWidth {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(1.1);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) rotate(45deg) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) rotate(45deg) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) rotate(45deg) translateY(-5px);
+  }
+}
+
+body:hover .cursor-dot,
+body:hover .cursor-outline {
+  opacity: 1;
+}
+
+* {
+  transition: opacity 0.3s ease;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+.keyboard-navigation *:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}

@@ -1,0 +1,25 @@
+{
+  "pages": {
+    "/page": [
+      "static/chunks/b52b3_next_dist_941f0e64._.js",
+      "static/chunks/codefolio-web_src_app_favicon_ico_mjs_a76217a8._.js",
+      "static/chunks/[root-of-the-server]__27c37e7f._.css",
+      "static/chunks/_1419e27f._.js",
+      "static/chunks/codefolio-web_src_app_components_6261fb25._.js",
+      "static/chunks/codefolio-web_src_app_layout_tsx_9a1700d4._.js",
+      "static/chunks/b52b3_next_dist_client_components_builtin_global-error_2d6acd6c.js",
+      "static/chunks/codefolio-web_src_app_components_12c26998._.js",
+      "static/chunks/node_modules_framer-motion_dist_es_a7e0362c._.js",
+      "static/chunks/codefolio-web_src_app_page_tsx_2d6acd6c._.js",
+      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_485f64d8._.js",
+      "static/chunks/b52b3_next_dist_compiled_react-dom_f12c4ef0._.js",
+      "static/chunks/b52b3_next_dist_compiled_next-devtools_index_d3429cbf.js",
+      "static/chunks/b52b3_next_dist_compiled_1d38a899._.js",
+      "static/chunks/b52b3_next_dist_client_6ba78a45._.js",
+      "static/chunks/b52b3_next_dist_29ef64e1._.js",
+      "static/chunks/b52b3_@swc_helpers_cjs_b8e07138._.js",
+      "static/chunks/codefolio-web_a0ff3932._.js",
+      "static/chunks/turbopack-codefolio-web_df84372e._.js"
+    ]
+  }
+}
