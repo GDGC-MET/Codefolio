@@ -1,4 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const skillCards = document.querySelectorAll('.skill-card');
+    skillCards.forEach(card => {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'skill-tooltip';
+        tooltip.innerText = card.querySelector('.skill-tags').innerText;
+        card.appendChild(tooltip);
+
+        card.addEventListener('mouseenter', () => {
+            tooltip.style.opacity = '1';
+            tooltip.style.transform = 'translateY(0)';
+        });
+
+        card.addEventListener('mouseleave', () => {
+            tooltip.style.opacity = '0';
+            tooltip.style.transform = 'translateY(-10px)';
+        });
+    });
+
+
+});
+
     
     setInterval(() => {
         console.log('Memory leak running...');
