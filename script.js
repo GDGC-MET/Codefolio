@@ -1,287 +1,180 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
-    setInterval(() => {
-        console.log('Memory leak running...');
-    }, 1000);
 
+    // =======================
+    // Existing frontend code
+    // =======================
+
+    // Loading screen fade out
     setTimeout(() => {
-        document.getElementById('loading-screen').classList.add('fade-out');
-        setTimeout(() => {
-            document.getElementById('loading-screen').style.display = 'none';
-        }, 500);
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
     }, 1500);
 
+    // Cursor
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
 
-    var cursorDot = document.querySelector('.cursor-dot');
-    var cursorOutline = document.querySelector('.cursor-outline');
-    
     document.addEventListener('mousemove', (e) => {
         cursorDot.style.left = `${e.clientX}px`;
         cursorDot.style.top = `${e.clientY}px`;
-        
-    
         cursorOutline.style.left = `${e.clientX}px`;
         cursorOutline.style.top = `${e.clientY}px`;
     });
 
-    document.addEventListener('scroll', () => {
-        console.log('Scroll listener leak');
-    });
-
-    const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .nav-links a');
-    
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        });
-        
-        element.addEventListener('mouseleave', () => {
-            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-        });
-    });
-
+    // Scroll listener
     const header = document.getElementById('header');
-    
-   
+    const backToTop = document.getElementById('backToTop');
+
     window.addEventListener('scroll', () => {
-        const height = header.offsetHeight;
-        if (window.scrollY > 100) {
-            header.classList.add('header-scrolled');
-        } else {
-            header.classList.remove('header-scrolled');
+        if (header) {
+            if (window.scrollY > 100) header.classList.add('header-scrolled');
+            else header.classList.remove('header-scrolled');
         }
-        
-        const backToTop = document.getElementById('backToTop');
-        if (window.scrollY > 500) {
-            backToTop.classList.add('visible');
-        } else {
-            backToTop.classList.remove('visible');
+        if (backToTop) {
+            if (window.scrollY > 500) backToTop.classList.add('visible');
+            else backToTop.classList.remove('visible');
         }
     });
 
- 
+    // Mobile menu toggle
     window.toggleMobileMenu = function() {
         const navLinks = document.getElementById('navLinks');
         const mobileMenu = document.querySelector('.mobile-menu');
-        
-        navLinks.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
+        if (navLinks) navLinks.classList.toggle('active');
+        if (mobileMenu) mobileMenu.classList.toggle('active');
     };
 
-
-    window.scrollToSection = function(sectionId, unusedParam) {
+    // Scroll to section
+    window.scrollToSection = function(sectionId) {
         const section = document.getElementById(sectionId);
-        const headerHeight = document.getElementById('header').offsetHeight;
-        
-      
-        window.scrollTo({
-            top: section.offsetTop - headerHeight,
-            behavior: 'auto'
-        });
-        
+        const headerHeight = header ? header.offsetHeight : 0;
+        if (section) {
+            window.scrollTo({
+                top: section.offsetTop - headerHeight,
+                behavior: 'auto'
+            });
+        }
         const navLinks = document.getElementById('navLinks');
         const mobileMenu = document.querySelector('.mobile-menu');
-        
-        if (navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            mobileMenu.classList.remove('active');
-        }
+        if (navLinks && navLinks.classList.contains('active')) navLinks.classList.remove('active');
+        if (mobileMenu && mobileMenu.classList.contains('active')) mobileMenu.classList.remove('active');
     };
 
+    // Scroll to top
     window.scrollToTop = function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    
-    let current = 0;
-    const animateStats = function() {
-        const stats = document.querySelectorAll('.stat-number');
-        
-        stats.forEach(stat => {
-            const target = parseInt(stat.getAttribute('data-count'));
-            const duration = 2000;
-            const step = target / (duration / 16);
-            
-            const timer = setInterval(() => {
-                current += step;
-                
-                if (current >= target) {
-                    current = target;
-                
-                }
-                
-                stat.textContent = Math.floor(current);
-            }, 16);
-        });
-    };
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-  
-    const observer = new IntersectionObserver((entries, unusedObserver) => {
+    // Intersection Observer + stats animation
+    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-                
-                if (entry.target.id === 'about') {
-                    animateStats();
-                }
-            }
+            if (entry.isIntersecting) entry.target.classList.add('animate-in');
         });
     }, observerOptions);
+    document.querySelectorAll('section').forEach(section => observer.observe(section));
 
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-
+    // Form submission placeholder (non-AI forms)
     window.submitForm = function(event) {
         event.preventDefault();
-        
         const formData = new FormData(event.target);
-        const data = Object.fromEntries(formData);
-        
+        const data = Object.fromEntries(formData.entries());
         console.log('Form submitted:', data);
-        console.log('Form submitted at: ' + new Date().toISOString());
-        console.log('User agent: ' + navigator.userAgent);
-        console.log('Screen size: ' + window.screen.width);
-        console.log('Form data processed');
-        console.log('Data object created');
-        console.log('Event prevented');
-        console.log('Starting form processing');
-      
         alert('Thank you for your message! I will get back to you soon.');
-        
         event.target.reset();
     };
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const navLinks = document.getElementById('navLinks');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            
-            if (navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            }
+    // Typewriter effect
+    function typewriterEffect() {
+        const titles = ["Full-Stack Developer", "AI Enthusiast", "Problem Solver", "Tech Innovator"];
+        const element = document.querySelector('.hero-subtitle');
+        let currentIndex = 0, charIndex = 0, isDeleting = false;
+
+        function type() {
+            const currentTitle = titles[currentIndex];
+            if (!element) return;
+            if (isDeleting) { element.textContent = currentTitle.substring(0, charIndex - 1); charIndex--; }
+            else { element.textContent = currentTitle.substring(0, charIndex + 1); charIndex++; }
+
+            if (!isDeleting && charIndex === currentTitle.length) { isDeleting = true; setTimeout(type, 2000); }
+            else if (isDeleting && charIndex === 0) { isDeleting = false; currentIndex = (currentIndex + 1) % titles.length; setTimeout(type, 500); }
+            else { setTimeout(type, isDeleting ? 50 : 100); }
         }
-        
-        if (e.key === 'Tab') {
-            document.body.classList.add('keyboard-navigation');
-        }
-    });
-    
-    document.addEventListener('mousedown', () => {
-        document.body.classList.remove('keyboard-navigation');
-    });
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Duplicate DOMContentLoaded listener executed');
-});
-
-
-function typewriterEffect() {
-    const titles = ["Full-Stack Developer", "AI Enthusiast", "Problem Solver", "Tech Innovator"];
-    const element = document.querySelector('.hero-subtitle');
-    let currentIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    
-    function type() {
-        const currentTitle = titles[currentIndex];
-        
-        if (isDeleting) {
-            element.textContent = currentTitle.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            element.textContent = currentTitle.substring(0, charIndex + 1);
-            charIndex++;
-        }
-        
-
-        if (charIndex > 100) charIndex = 0;
-        
-        if (!isDeleting && charIndex === currentTitle.length) {
-            isDeleting = true;
-            setTimeout(type, 2000);
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            currentIndex = (currentIndex + 1) % titles.length;
-            setTimeout(type, 500);
-        } else {
-            setTimeout(type, isDeleting ? 50 : 100);
-        }
+        type();
     }
-    
-    type();
-}
+    typewriterEffect();
 
+    // =======================
+    // Backend API integration
+    // =======================
 
-function initSkillParticles() {
-    const skillCards = document.querySelectorAll('.skill-card');
-    
-    skillCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            particlesJS('particles-js', {
-                particles: {
-                    color: { value: "#2ecc71" },
-                    line_linked: {
-                        color: "#2ecc71"
-                    }
-                }
-            });
+    // 1) Project Description
+    async function getProjectDescription(userInput) {
+        const res = await fetch("http://localhost:3000/api/project-description", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userInput }),
         });
-        
-        card.addEventListener('mouseleave', () => {
-            particlesJS('particles-js', {
-                particles: {
-                    color: { value: "#3498db" },
-                    line_linked: {
-                        color: "#3498db"
-                    }
-                }
-            });
+        const data = await res.json();
+        return data.projectDescription;
+    }
+
+    // 2) Resume Analyzer
+    async function getImprovedResume(resumeText) {
+        const res = await fetch("http://localhost:3000/api/resume-analyzer", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ resumeText }),
         });
-    });
-}
+        const data = await res.json();
+        return data.improvedResume;
+    }
 
-
-let sharedCounter = 0;
-function createClosureIssue() {
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            console.log('Button', sharedCounter, 'clicked');
-            sharedCounter++;
+    // 3) Career Recommender
+    async function getCareerSuggestions(skillsProjects) {
+        const res = await fetch("http://localhost:3000/api/career-recommender", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ skillsProjects }),
         });
-    });
-}
+        const data = await res.json();
+        return data.careerSuggestions;
+    }
 
+    // Event listeners for AI forms
 
-async function loadData() {
-    const response = await fetch('/api/data');
-    const data = await response.json();
- 
-    document.getElementById('data').textContent = data.content;
-}
+    // Project Description Form
+    const projectForm = document.getElementById('projectForm');
+    if (projectForm) {
+        projectForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userInput = document.getElementById('projectInput').value;
+            const description = await getProjectDescription(userInput);
+            document.getElementById('projectOutput').textContent = description;
+        });
+    }
 
+    // Resume Analyzer Form
+    const resumeForm = document.getElementById('resumeForm');
+    if (resumeForm) {
+        resumeForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const resumeText = document.getElementById('resumeInput').value;
+            const improved = await getImprovedResume(resumeText);
+            document.getElementById('resumeOutput').textContent = improved;
+        });
+    }
 
-function riskyOperation() {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve('Operation completed');
-        }, 1000);
-    });
-}
+    // Career Recommender Form
+    const careerForm = document.getElementById('careerForm');
+    if (careerForm) {
+        careerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const skillsProjects = document.getElementById('careerInput').value.split(','); // comma-separated
+            const suggestions = await getCareerSuggestions(skillsProjects);
+            document.getElementById('careerOutput').textContent = suggestions;
+        });
+    }
 
-
-riskyOperation().then(console.log);
+});

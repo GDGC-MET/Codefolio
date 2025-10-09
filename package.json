@@ -1,0 +1,26 @@
+{
+  "name": "codefolio-web",
+  "version": "1.0.0",
+  "description": "This is a modern, responsive portfolio for a Full-Stack Developer & AI Enthusiast. It features a sleek dark theme with an interactive particle background, a custom cursor, and smooth scroll animations. Built with HTML, CSS, and JS, it showcases skills and projects in a dynamic, engaging way.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmritiKshatriya/Codefolio-WEB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SmritiKshatriya/Codefolio-WEB/issues"
+  },
+  "homepage": "https://github.com/SmritiKshatriya/Codefolio-WEB#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2"
+  }
+}
