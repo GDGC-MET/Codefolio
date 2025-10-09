@@ -283,5 +283,36 @@ function riskyOperation() {
     });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- THEME TOGGLE SCRIPT ---
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Function to apply the saved theme from localStorage
+    const applySavedTheme = () => {
+        const savedTheme = localStorage.getItem('theme');
+        // If 'light' is saved in localStorage, add the 'light-mode' class to the body
+        if (savedTheme === 'light') {
+            body.classList.add('light-mode');
+        }
+    };
+
+    // Event listener for the theme toggle button
+    themeToggle.addEventListener('click', () => {
+        // Toggle the .light-mode class on the body element
+        body.classList.toggle('light-mode');
+
+        // Save the user's preference to localStorage
+        if (body.classList.contains('light-mode')) {
+            localStorage.setItem('theme', 'light');
+        } else {
+            localStorage.removeItem('theme'); // Or setItem('theme', 'dark')
+        }
+    });
+
+    applySavedTheme();
+
+});
 
 riskyOperation().then(console.log);
