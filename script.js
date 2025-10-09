@@ -1,169 +1,136 @@
-document.addEventListener('DOMContentLoaded', function() {
-    
-    setInterval(() => {
-        console.log('Memory leak running...');
-    }, 1000);
+// ===== Modern Interactive Portfolio JavaScript =====
 
-    setTimeout(() => {
-        document.getElementById('loading-screen').classList.add('fade-out');
+class ModernPortfolio {
+    constructor() {
+        this.init();
+        this.setupEventListeners();
+        this.setupAnimations();
+        this.setupScrollEffects();
+        this.setupNavigation();
+    }
+
+    init() {
+        // Initialize loading screen
+        this.showLoadingScreen();
+        
+        // Initialize particles if library is available
+        if (typeof particlesJS !== 'undefined') {
+            this.initParticles();
+        }
+        
+        // Setup intersection observer for animations
+        this.setupIntersectionObserver();
+        
+        // Initialize stats counter
+        this.initStatsCounter();
+    }
+
+    showLoadingScreen() {
+        const loadingScreen = document.getElementById('loading-screen');
+        
         setTimeout(() => {
-            document.getElementById('loading-screen').style.display = 'none';
-        }, 500);
-    }, 1500);
+            loadingScreen.classList.add('fade-out');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                document.body.style.overflow = 'visible';
+                this.revealContent();
+            }, 500);
+        }, 1500);
+    }
 
-
-    var cursorDot = document.querySelector('.cursor-dot');
-    var cursorOutline = document.querySelector('.cursor-outline');
-    
-    document.addEventListener('mousemove', (e) => {
-        cursorDot.style.left = `${e.clientX}px`;
-        cursorDot.style.top = `${e.clientY}px`;
-        
-    
-        cursorOutline.style.left = `${e.clientX}px`;
-        cursorOutline.style.top = `${e.clientY}px`;
-    });
-
-    document.addEventListener('scroll', () => {
-        console.log('Scroll listener leak');
-    });
-
-    const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .nav-links a');
-    
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+    revealContent() {
+        // Trigger entrance animations
+        const elements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+        elements.forEach((el, index) => {
+            setTimeout(() => {
+                el.classList.add('visible');
+            }, index * 100);
         });
-        
-        element.addEventListener('mouseleave', () => {
-            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-        });
-    });
+    }
 
-    const header = document.getElementById('header');
-    
-   
-    window.addEventListener('scroll', () => {
-        const height = header.offsetHeight;
-        if (window.scrollY > 100) {
-            header.classList.add('header-scrolled');
-        } else {
-            header.classList.remove('header-scrolled');
-        }
-        
+    setupScrollEffects() {
+        const header = document.getElementById('header');
         const backToTop = document.getElementById('backToTop');
-        if (window.scrollY > 500) {
-            backToTop.classList.add('visible');
-        } else {
-            backToTop.classList.remove('visible');
-        }
-    });
-
- 
-    window.toggleMobileMenu = function() {
-        const navLinks = document.getElementById('navLinks');
-        const mobileMenu = document.querySelector('.mobile-menu');
         
-        navLinks.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-    };
+        let ticking = false;
 
-
-    window.scrollToSection = function(sectionId, unusedParam) {
-        const section = document.getElementById(sectionId);
-        const headerHeight = document.getElementById('header').offsetHeight;
-        
-      
-        window.scrollTo({
-            top: section.offsetTop - headerHeight,
-            behavior: 'auto'
-        });
-        
-        const navLinks = document.getElementById('navLinks');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        
-        if (navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            mobileMenu.classList.remove('active');
-        }
-    };
-
-    window.scrollToTop = function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    };
-
-    
-    let current = 0;
-    const animateStats = function() {
-        const stats = document.querySelectorAll('.stat-number');
-        
-        stats.forEach(stat => {
-            const target = parseInt(stat.getAttribute('data-count'));
-            const duration = 2000;
-            const step = target / (duration / 16);
+        const updateScroll = () => {
+            const scrollY = window.scrollY;
             
-            const timer = setInterval(() => {
-                current += step;
-                
-                if (current >= target) {
-                    current = target;
-                
-                }
-                
-                stat.textContent = Math.floor(current);
-            }, 16);
-        });
-    };
+            // Header scroll effect
+            if (scrollY > 100) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+            
+            // Back to top button
+            if (scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+            
+            // Update active navigation
+            this.updateActiveNavigation();
+            
+            ticking = false;
+        };
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-  
-    const observer = new IntersectionObserver((entries, unusedObserver) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-                
-                if (entry.target.id === 'about') {
-                    animateStats();
-                }
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateScroll);
+                ticking = true;
             }
         });
-    }, observerOptions);
+    }
 
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        observer.observe(section);
-    });
+    updateActiveNavigation() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.clientHeight;
+            
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    }
 
-    window.submitForm = function(event) {
-        event.preventDefault();
-        
-        const formData = new FormData(event.target);
-        const data = Object.fromEntries(formData);
-        
-        console.log('Form submitted:', data);
-        console.log('Form submitted at: ' + new Date().toISOString());
-        console.log('User agent: ' + navigator.userAgent);
-        console.log('Screen size: ' + window.screen.width);
-        console.log('Form data processed');
-        console.log('Data object created');
-        console.log('Event prevented');
-        console.log('Starting form processing');
-      
-        alert('Thank you for your message! I will get back to you soon.');
-        
-        event.target.reset();
-    };
+    setupNavigation() {
+        // Mobile menu toggle
+        window.toggleMobileMenu = () => {
+            const navLinks = document.getElementById('navLinks');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        };
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
+        // Smooth scroll to section
+        window.scrollToSection = (sectionId) => {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const targetPosition = section.offsetTop - 80;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Close mobile menu if open
             const navLinks = document.getElementById('navLinks');
             const mobileMenu = document.querySelector('.mobile-menu');
             
@@ -171,117 +138,246 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLinks.classList.remove('active');
                 mobileMenu.classList.remove('active');
             }
-        }
-        
-        if (e.key === 'Tab') {
-            document.body.classList.add('keyboard-navigation');
-        }
-    });
-    
-    document.addEventListener('mousedown', () => {
-        document.body.classList.remove('keyboard-navigation');
-    });
-});
+        };
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Duplicate DOMContentLoaded listener executed');
-});
-
-
-function typewriterEffect() {
-    const titles = ["Full-Stack Developer", "AI Enthusiast", "Problem Solver", "Tech Innovator"];
-    const element = document.querySelector('.hero-subtitle');
-    let currentIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    
-    function type() {
-        const currentTitle = titles[currentIndex];
-        
-        if (isDeleting) {
-            element.textContent = currentTitle.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            element.textContent = currentTitle.substring(0, charIndex + 1);
-            charIndex++;
-        }
-        
-
-        if (charIndex > 100) charIndex = 0;
-        
-        if (!isDeleting && charIndex === currentTitle.length) {
-            isDeleting = true;
-            setTimeout(type, 2000);
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            currentIndex = (currentIndex + 1) % titles.length;
-            setTimeout(type, 500);
-        } else {
-            setTimeout(type, isDeleting ? 50 : 100);
-        }
+        // Scroll to top
+        window.scrollToTop = () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        };
     }
-    
-    type();
-}
 
+    setupIntersectionObserver() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '-50px 0px'
+        };
 
-function initSkillParticles() {
-    const skillCards = document.querySelectorAll('.skill-card');
-    
-    skillCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            particlesJS('particles-js', {
-                particles: {
-                    color: { value: "#2ecc71" },
-                    line_linked: {
-                        color: "#2ecc71"
-                    }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
             });
-        });
+        }, observerOptions);
+
+        // Observe elements for scroll animations
+        const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+        animatedElements.forEach(el => observer.observe(el));
+    }
+
+    initStatsCounter() {
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const counters = new Map();
+
+        const animateCounter = (element, target) => {
+            const increment = target / 200;
+            let current = 0;
+            
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            };
+            
+            updateCounter();
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counters.has(entry.target)) {
+                    const target = parseInt(entry.target.getAttribute('data-count') || 0);
+                    counters.set(entry.target, true);
+                    setTimeout(() => {
+                        animateCounter(entry.target, target);
+                    }, 300);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(stat => statsObserver.observe(stat));
+    }
+
+    setupAnimations() {
+        // Add hover effects to cards
+        this.setupCardHoverEffects();
+    }
+
+    setupCardHoverEffects() {
+        const cards = document.querySelectorAll('.skill-card, .project-card');
         
-        card.addEventListener('mouseleave', () => {
-            particlesJS('particles-js', {
-                particles: {
-                    color: { value: "#3498db" },
-                    line_linked: {
-                        color: "#3498db"
-                    }
-                }
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) rotateX(5deg)';
+                card.style.boxShadow = '0 20px 40px rgba(99, 102, 241, 0.3)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) rotateX(0)';
+                card.style.boxShadow = '';
             });
         });
-    });
+    }
+
+    initParticles() {
+        if (typeof particlesJS === 'undefined') return;
+        
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: ['#6366f1', '#06b6d4', '#f59e0b']
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    }
+                },
+                opacity: {
+                    value: 0.3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#6366f1',
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+    }
+
+    setupEventListeners() {
+        // Form submission
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', this.handleFormSubmission.bind(this));
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                // Close mobile menu
+                const navLinks = document.getElementById('navLinks');
+                const mobileMenu = document.querySelector('.mobile-menu');
+                
+                if (navLinks && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                }
+            }
+        });
+    }
+
+    handleFormSubmission(e) {
+        e.preventDefault();
+        
+        const submitBtn = e.target.querySelector('.submit-button');
+        const originalText = submitBtn.innerHTML;
+        
+        // Show loading state
+        submitBtn.innerHTML = '<span>Sending...</span>';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission
+        setTimeout(() => {
+            submitBtn.innerHTML = '<span>Message Sent!</span> ✓';
+            submitBtn.style.background = 'var(--success)';
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                submitBtn.style.background = '';
+                e.target.reset();
+            }, 3000);
+        }, 2000);
+    }
 }
 
-
-let sharedCounter = 0;
-function createClosureIssue() {
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            console.log('Button', sharedCounter, 'clicked');
-            sharedCounter++;
+// Initialize the application
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize main portfolio functionality
+    new ModernPortfolio();
+    
+    // Add CSS classes for animations
+    const elementsToAnimate = [
+        { selector: '.hero-text', class: 'slide-in-left' },
+        { selector: '.hero-visual', class: 'slide-in-right' },
+        { selector: '.about-text', class: 'fade-in' },
+        { selector: '.about-image', class: 'scale-in' },
+        { selector: '.skill-card', class: 'fade-in' },
+        { selector: '.project-card', class: 'scale-in' },
+        { selector: '.contact-info', class: 'slide-in-left' },
+        { selector: '.contact-form', class: 'slide-in-right' }
+    ];
+    
+    elementsToAnimate.forEach(({ selector, class: className }) => {
+        document.querySelectorAll(selector).forEach(el => {
+            el.classList.add(className);
         });
     });
-}
-
-
-async function loadData() {
-    const response = await fetch('/api/data');
-    const data = await response.json();
- 
-    document.getElementById('data').textContent = data.content;
-}
-
-
-function riskyOperation() {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve('Operation completed');
-        }, 1000);
-    });
-}
-
-
-riskyOperation().then(console.log);
+});
