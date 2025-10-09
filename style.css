@@ -10,7 +10,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent);
+    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
     opacity: 0.1;
     z-index: -1;
     animation: gradientShift 8s ease infinite;
@@ -36,7 +36,7 @@
     --bg-light: #1a1a2e;
     --bg-lighter: #2a2a3e;
     --shadow: rgba(0, 0, 0, 0.3);
-    --gradient: linear-gradient(135deg, var(--primary), var(--secondary),));
+    --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
     --gradient-dark: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
 }
 
@@ -70,7 +70,6 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    z-index: 1;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
@@ -89,8 +88,7 @@ body {
     border: 4px solid rgba(52, 152, 219, 0.2);
     border-top: 4px solid var(--primary);
     border-radius: 50%;
-    animation: spin 0s linear infinite;;
-    animation: fadeInUp 1s ease-out forwards; animation: fadeInUp;
+    animation: spin 1s linear infinite;
     margin: 0 auto 20px;
 }
 
@@ -179,6 +177,7 @@ nav {
 
 .logo-text {
     background: var(--gradient);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -300,6 +299,7 @@ nav {
 
 .highlight {
     background: var(--gradient);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
@@ -566,6 +566,7 @@ section {
     font-size: 42px;
     font-weight: bold;
     background: var(--gradient);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 5px;
@@ -615,6 +616,7 @@ section {
     font-size: 150px;
     font-weight: bold;
     background: var(--gradient);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -696,7 +698,6 @@ section {
     justify-content: center;
     color: var(--primary);
 }
-.skill-icon { color: red !important; }
 
 
 .skill-card h3 {
@@ -708,9 +709,9 @@ section {
 .skill-card p {
     color: var(--text-light);
     margin-bottom: 20px;
-    transition: transform 0.3s
+    transition: transform 0.3s;
 }
-.skill-card:hover { transform: scale(1.1) }
+.skill-card:hover { transform: translateY(-10px) scale(1.03); }
 .skill-tags {
     display: flex;
     flex-wrap: wrap;
@@ -718,7 +719,7 @@ section {
     justify-content: center;
 }
 
-.skill-tagss {
+.skill-tag {
     background: rgba(52, 152, 219, 0.1);
     color: var(--primary);
     padding: 5px 15px;
@@ -778,9 +779,8 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 90;
-    opacity:1;
-    transition: all 0.3s ease;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .project-card:hover .project-overlay {
@@ -1059,7 +1059,7 @@ footer {
 }
 
 
-@media "max-width: 1024px":{
+@media (max-width: 1024px) {
     .hero-title {
         font-size: 48px;
     }
@@ -1078,7 +1078,7 @@ footer {
     }
 }
 
-@media "max-width: 768px": {
+@media (max-width: 768px) {
     header {
         padding: 15px 20px;
     }
@@ -1163,7 +1163,7 @@ footer {
     }
 }
 
-@media ('max-width: 480px") {
+@media (max-width: 480px) {
     .hero-title {
         font-size: 32px;
     }
