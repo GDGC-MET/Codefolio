@@ -41,6 +41,12 @@
                 <li><a href="#projects" onclick="scrollToSection('projects')" aria-label="Projects section" target="_self" target="_blank">Projects</a></li>
                 <li><a href="#contact" onclick="scrollToSection('contact')" aria-label="Contact section" target="_self" target="_blank">Contact</a></li>
             </ul>
+            <div class="theme-controls">
+                <label class="theme-toggle-label">
+                    <input class="theme-toggle-input" type="checkbox" onclick="toggleTheme()" />
+                    <div class="theme-toggle-slider"></div>
+                </label>
+            </div>
             <div class="mobile-menu" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
                 <span></span>
                 <span></span>
@@ -62,7 +68,7 @@
                         <button class="cta-button primary" onclick="scrollToSection('projects')" aria-label="View my projects">
                             <span>View My Work</span>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                         <button class="cta-button secondary" onclick="scrollToSection('contact')" aria-label="Get in touch">
@@ -70,8 +76,7 @@
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg></div>
-                </svj>
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -133,26 +138,62 @@
                 <h2 class="section-title">Technical Skills</h2>
                 <div class="skills-grid">
                     
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+
+                    <!-- Individual Skill Cards -->
+                    <div class="small-skill-card react-card">
+                        <div class="skill-card-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="skill-tech-icon">
                         </div>
-                        <h3>FULL Stack Development</h3>
-                        <p>Creating responsive, interactive user interfaces with modern web technologies and advanced animations.</p>
-                        <div class="skill-tags">
-                            <span class="skill-tag">HTML5</span>
-                            <span class="skill-tag">CSS3</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">React</span>
-                            <span class="skill-tag">3D Animations</span>
-                            <span class="skill-tag">MERN Stack</span>
+                        <h4 class="skill-card-title">React & Next.js</h4>
+                        <div class="skill-card-bar">
+                            <div class="skill-card-progress" data-progress="90"></div>
                         </div>
+                        <span class="skill-card-percentage">90%</span>
                     </div>
-                   
+
+                    <div class="small-skill-card cloud-card">
+                        <div class="skill-card-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Cloud" class="skill-tech-icon">
+                        </div>
+                        <h4 class="skill-card-title">Cloud Deployment</h4>
+                        <div class="skill-card-bar">
+                            <div class="skill-card-progress" data-progress="75"></div>
+                        </div>
+                        <span class="skill-card-percentage">75%</span>
+                    </div>
+
+                    <div class="small-skill-card node-card">
+                        <div class="skill-card-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="skill-tech-icon">
+                        </div>
+                        <h4 class="skill-card-title">Node.js & Express</h4>
+                        <div class="skill-card-bar">
+                            <div class="skill-card-progress" data-progress="85"></div>
+                        </div>
+                        <span class="skill-card-percentage">85%</span>
+                    </div>
+
+                    <div class="small-skill-card mongo-card">
+                        <div class="skill-card-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" class="skill-tech-icon">
+                        </div>
+                        <h4 class="skill-card-title">MongoDB & SQL</h4>
+                        <div class="skill-card-bar">
+                            <div class="skill-card-progress" data-progress="80"></div>
+                        </div>
+                        <span class="skill-card-percentage">80%</span>
+                    </div>
+
+                    <div class="small-skill-card typescript-card">
+                        <div class="skill-card-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" class="skill-tech-icon">
+                        </div>
+                        <h4 class="skill-card-title">TypeScript</h4>
+                        <div class="skill-card-bar">
+                            <div class="skill-card-progress" data-progress="88"></div>
+                        </div>
+                        <span class="skill-card-percentage">88%</span>
+                    </div>
 
                 </div>
             </div>
