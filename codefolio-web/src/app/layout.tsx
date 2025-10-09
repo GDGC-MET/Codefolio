@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import ParticlesBackground from "@/app/components/particles-background";
 import CustomCursor from "@/app/components/custom-cursor";
+import BackToTop from "@/app/components/back-to-top";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-black text-gray-300 overflow-x-hidden cursor-none`}>
       <ParticlesBackground />
       <CustomCursor />
+      <BackToTop />
       {children}
       </body>
       </html>
