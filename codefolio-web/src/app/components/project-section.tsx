@@ -117,7 +117,6 @@ const ProjectsSection = () => {
             className="py-24 px-4 md:px-12 bg-gray-900/30"
         >
             <div className="max-w-7xl mx-auto">
-                {/* Section Title */}
                 <motion.h2
                     className="text-4xl md:text-5xl font-bold text-center mb-16 relative text-white"
                     initial={{ opacity: 0, y: -30 }}
@@ -133,7 +132,6 @@ const ProjectsSection = () => {
                     />
                 </motion.h2>
 
-                {/* Projects Grid */}
                 <motion.div
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                     variants={containerVariants}
@@ -150,9 +148,7 @@ const ProjectsSection = () => {
                                 transition: { type: "spring", stiffness: 300 }
                             }}
                         >
-                            {/* Project Image/Icon */}
                             <div className="relative h-48 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center overflow-hidden">
-                                {/* Project Icon */}
                                 <motion.div
                                     className="text-6xl mb-4"
                                     whileHover={{
@@ -164,7 +160,6 @@ const ProjectsSection = () => {
                                     {project.icon}
                                 </motion.div>
 
-                                {/* Overlay with Links */}
                                 <motion.div
                                     className="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
                                     initial={{ opacity: 0 }}
@@ -197,7 +192,6 @@ const ProjectsSection = () => {
                                 </motion.div>
                             </div>
 
-                            {/* Project Content */}
                             <div className="p-6">
                                 <motion.h3
                                     className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors duration-300"
@@ -210,7 +204,6 @@ const ProjectsSection = () => {
                                     {project.description}
                                 </p>
 
-                                {/* Project Tags */}
                                 <div className="flex flex-wrap gap-2">
                                     {project.tags.map((tag, index) => (
                                         <motion.span
@@ -231,7 +224,6 @@ const ProjectsSection = () => {
                                 </div>
                             </div>
 
-                            {/* Gradient Border Effect */}
                             <motion.div
                                 className={`absolute inset-0 bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none rounded-2xl`}
                                 initial={{ opacity: 0 }}
@@ -241,7 +233,6 @@ const ProjectsSection = () => {
                     ))}
                 </motion.div>
 
-                {/* View More Projects Button */}
                 <motion.div
                     className="text-center mt-12"
                     initial={{ opacity: 0, y: 20 }}

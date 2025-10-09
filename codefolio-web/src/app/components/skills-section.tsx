@@ -171,11 +171,9 @@ const SkillsSection = () => {
             ref={sectionRef}
             className="py-24 px-4 md:px-12 relative overflow-hidden"
         >
-            {/* Background gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-green-500/5 opacity-50" />
 
             <div className="max-w-7xl mx-auto relative z-10">
-                {/* Section Title */}
                 <motion.h2
                     className="text-4xl md:text-5xl font-bold text-center mb-16 relative text-white"
                     initial={{ opacity: 0, y: -30 }}
@@ -191,7 +189,6 @@ const SkillsSection = () => {
                     />
                 </motion.h2>
 
-                {/* Skills Grid */}
                 <motion.div
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                     variants={containerVariants}
@@ -211,14 +208,12 @@ const SkillsSection = () => {
                                 transition: { type: "spring", stiffness: 300 }
                             }}
                         >
-                            {/* Gradient border effect */}
                             <motion.div
                                 className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: hoveredSkill === skill.id ? 0.1 : 0 }}
                             />
 
-                            {/* Top gradient line */}
                             <motion.div
                                 className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${skill.color}`}
                                 initial={{ scaleX: 0 }}
@@ -226,7 +221,6 @@ const SkillsSection = () => {
                                 transition={{ delay: skill.id * 0.2, duration: 0.8 }}
                             />
 
-                            {/* Skill Icon */}
                             <motion.div
                                 className={`w-20 h-20 bg-gradient-to-br ${skill.color} bg-opacity-10 rounded-2xl flex items-center justify-center mb-6 text-blue-400 group-hover:text-white transition-colors duration-300`}
                                 whileHover={{
@@ -238,7 +232,6 @@ const SkillsSection = () => {
                                 {skill.icon}
                             </motion.div>
 
-                            {/* Skill Title */}
                             <motion.h3
                                 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-300 transition-colors duration-300"
                                 layoutId={`skill-title-${skill.id}`}
@@ -246,12 +239,10 @@ const SkillsSection = () => {
                                 {skill.title}
                             </motion.h3>
 
-                            {/* Skill Description */}
                             <p className="text-gray-300 leading-relaxed mb-6 group-hover:text-gray-200 transition-colors duration-300">
                                 {skill.description}
                             </p>
 
-                            {/* Skill Level Progress Bar */}
                             <div className="mb-6">
                                 <div className="flex justify-between items-center mb-2">
                                     <span className="text-sm text-gray-400">Proficiency</span>
@@ -271,7 +262,6 @@ const SkillsSection = () => {
                                 </div>
                             </div>
 
-                            {/* Skill Tags */}
                             <div className="flex flex-wrap gap-2">
                                 {skill.tags.map((tag, index) => (
                                     <motion.span
@@ -294,7 +284,6 @@ const SkillsSection = () => {
                                 ))}
                             </div>
 
-                            {/* Floating particles effect on hover */}
                             {hoveredSkill === skill.id && (
                                 <motion.div
                                     className="absolute inset-0 pointer-events-none"
@@ -327,7 +316,6 @@ const SkillsSection = () => {
                     ))}
                 </motion.div>
 
-                {/* Additional Skills Banner */}
                 <motion.div
                     className="mt-16 text-center"
                     initial={{ opacity: 0, y: 20 }}
