@@ -41,6 +41,12 @@
                 <li><a href="#projects" onclick="scrollToSection('projects')" aria-label="Projects section" target="_self" target="_blank">Projects</a></li>
                 <li><a href="#contact" onclick="scrollToSection('contact')" aria-label="Contact section" target="_self" target="_blank">Contact</a></li>
             </ul>
+            <div class="theme-controls">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                    <span class="theme-icon sun-icon">☀️</span>
+                    <span class="theme-icon moon-icon">🌙</span>
+                </button>
+            </div>
             <div class="mobile-menu" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
                 <span></span>
                 <span></span>
@@ -132,26 +138,59 @@
                 <h2 class="section-title">Technical Skills</h2>
                 <div class="skills-grid">
                     
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                    <div class="card" width="48" height="48">
+                        <div class="card__border"></div>
+                        <div class="card_title__container">
+                            <span class="card_title">Full Stack Development</span>
+                            <p class="card_paragraph">
+                                Building scalable web applications with modern technologies and best practices.
+                            </p>
                         </div>
-                        <h3>FULL Stack Development</h3>
-                        <p>Creating responsive, interactive user interfaces with modern web technologies and advanced animations.</p>
-                        <div class="skill-tags">
-                            <span class="skill-tag">HTML5</span>
-                            <span class="skill-tag">CSS3</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">React</span>
-                            <span class="skill-tag">3D Animations</span>
-                            <span class="skill-tag">MERN Stack</span>
-                        </div>
+                        <hr class="line" />
+                        <ul class="card__list">
+                            <li class="card__list_item">
+                                <span class="check">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                                        <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </span>
+                                <span class="list_text"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="skill-badge-inline"> React & Next.js</span>
+                            </li>
+                            <li class="card__list_item">
+                                <span class="check">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                                        <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </span>
+                                <span class="list_text"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="skill-badge-inline"> Node.js & Express</span>
+                            </li>
+                            <li class="card__list_item">
+                                <span class="check">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                                        <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </span>
+                                <span class="list_text"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" class="skill-badge-inline"> MongoDB & SQL</span>
+                            </li>
+                            <li class="card__list_item">
+                                <span class="check">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                                        <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </span>
+                                <span class="list_text"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" class="skill-badge-inline"> TypeScript</span>
+                            </li>
+                            <li class="card__list_item">
+                                <span class="check">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="check_svg">
+                                        <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </span>
+                                <span class="list_text"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Cloud" class="skill-badge-inline"> Cloud Deployment</span>
+                            </li>
+                        </ul>
+                        <button class="button" onclick="scrollToSection('projects')">View Projects</button>
                     </div>
-                   
 
                 </div>
             </div>

@@ -285,3 +285,39 @@ function riskyOperation() {
 
 
 riskyOperation().then(console.log);
+
+// Theme Toggle Functionality
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    // Update particles.js color for theme
+    updateParticlesColor(newTheme);
+}
+
+// Initialize theme on page load
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateParticlesColor(savedTheme);
+}
+
+// Update particles color based on theme
+function updateParticlesColor(theme) {
+    if (window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS) {
+        const particles = window.pJSDom[0].pJS.particles;
+        const newColor = theme === 'light' ? '#2980b9' : '#3498db';
+        
+        particles.color.value = newColor;
+        particles.line_linked.color = newColor;
+        
+        // Refresh particles
+        window.pJSDom[0].pJS.fn.particlesRefresh();
+    }
+}
+
+// Initialize theme when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeTheme);
